@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import CustomCursor from '@/components/CustomCursor'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import BlogCursor from '@/components/BlogCursor'
+import BlogNavbar from '@/components/BlogNavbar'
+import BlogFooter from '@/components/BlogFooter'
 import PostBody from '@/components/blog/PostBody'
 import PostTag from '@/components/blog/PostTag'
 import PostCard from '@/components/blog/PostCard'
@@ -82,8 +82,8 @@ export default async function PostPage({
 
   return (
     <>
-      <CustomCursor />
-      <Navbar />
+      <BlogCursor />
+      <BlogNavbar />
       <main>
 
         {/* Breadcrumb */}
@@ -95,7 +95,7 @@ export default async function PostPage({
             borderBottom: '1px solid rgba(242,240,235,0.08)',
           }}
         >
-          
+          <a
             href="/blog"
             className="text-[10px] uppercase tracking-[0.15em] no-underline transition-colors duration-200"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
@@ -268,7 +268,7 @@ export default async function PostPage({
               </div>
               <div className="flex flex-col">
                 {sidebarPosts.map((related, i) => (
-                  
+                  <a
                     key={related._id}
                     href={`/blog/${related.slug}`}
                     className="block no-underline pb-5 mb-5 transition-opacity duration-200"
@@ -282,7 +282,7 @@ export default async function PostPage({
                     onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
                   >
                     <div className="mb-2">
-                      <PostTag category={related.category.slug as any} size="sm" />
+                      <PostTag category={related.category?.slug as any} size="sm" />
                     </div>
                     <div
                       className="text-[13px] font-semibold leading-[1.3] mb-2"
@@ -349,7 +349,7 @@ export default async function PostPage({
         )}
 
       </main>
-      <Footer />
+      <BlogFooter />
     </>
   )
 }

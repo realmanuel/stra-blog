@@ -1,8 +1,13 @@
     import Link from 'next/link'
-    import { Post, CATEGORY_LABELS, CATEGORY_STYLES } from '@/lib/posts'
+    import { Post, CATEGORY_STYLES, resolveCategorySlug } from '@/lib/posts'
     import PostTag from './PostTag'
 
     export default function BlogHero({ post }: { post: Post }) {
+    const category = resolveCategorySlug(post.category)
+    const postDate = post.date ?? post.publishedAt ?? ''
+    const coverEmoji = post.coverEmoji ?? '✍️'
+    const avatarLabel = typeof post.author.avatar === 'string' ? post.author.avatar : '✍️'
+
     return (
         <article
         className="grid grid-cols-1 md:grid-cols-2"
@@ -20,7 +25,7 @@
             className="w-full h-full flex items-center justify-center relative"
             style={{
                 minHeight: '560px',
-                background: `linear-gradient(135deg, ${CATEGORY_STYLES[post.category].bg.replace('0.05', '0.12')} 0%, transparent 60%), linear-gradient(to bottom right, #1A1A22, #030305)`,
+                background: `linear-gradient(135deg, ${CATEGORY_STYLES[category].bg.replace('0.05', '0.12')} 0%, transparent 60%), linear-gradient(to bottom right, #1A1A22, #030305)`,
             }}
             >
             {/* Grid overlay */}
@@ -35,7 +40,7 @@
                 }}
             />
             <div className="relative z-10 text-center">
-                <span className="text-[80px] block mb-4 opacity-60">{post.coverEmoji}</span>
+                <span className="text-[80px] block mb-4 opacity-60">{coverEmoji}</span>
                 <span
                 className="text-[10px] uppercase tracking-[0.2em]"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
@@ -47,7 +52,7 @@
             {/* Accent bottom line */}
             <div
             className="absolute bottom-0 left-0 right-0"
-            style={{ height: '3px', background: CATEGORY_STYLES[post.category].color }}
+            style={{ height: '3px', background: CATEGORY_STYLES[category].color }}
             />
         </div>
 
@@ -60,7 +65,7 @@
                 className="text-[10px] tracking-[0.1em]"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
                 >
-                {post.date}
+                {postDate}
                 </span>
             </div>
 
@@ -95,7 +100,7 @@
                     border: '1px solid rgba(200,255,0,0.2)',
                 }}
                 >
-                {post.author.avatar}
+                {avatarLabel}
                 </div>
                 <div>
                 <div

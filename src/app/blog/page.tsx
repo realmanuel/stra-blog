@@ -1,6 +1,6 @@
-import CustomCursor from '@/components/CustomCursor'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import BlogCursor from '@/components/BlogCursor'
+import BlogNavbar from '@/components/BlogNavbar'
+import BlogFooter from '@/components/BlogFooter'
 import BlogHero from '@/components/blog/BlogHero'
 import PostCard from '@/components/blog/PostCard'
 import CategoryBar from '@/components/blog/CategoryBar'
@@ -34,8 +34,8 @@ export default async function BlogPage() {
 
   return (
     <>
-      <CustomCursor />
-      <Navbar />
+      <BlogCursor />
+      <BlogNavbar />
       <main>
 
         {/* Journal header */}
@@ -184,7 +184,7 @@ export default async function BlogPage() {
         )}
 
       </main>
-      <Footer />
+      <BlogFooter />
     </>
   )
 }

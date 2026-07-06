@@ -1,5 +1,5 @@
     import Link from 'next/link'
-    import { Post, CATEGORY_STYLES } from '@/lib/posts'
+    import { Post, CATEGORY_STYLES, resolveCategorySlug } from '@/lib/posts'
     import PostTag from './PostTag'
 
     interface PostCardProps {
@@ -9,7 +9,10 @@
     }
 
     export default function PostCard({ post, variant = 'default', index }: PostCardProps) {
-    const gradientBg = `linear-gradient(135deg, ${CATEGORY_STYLES[post.category].bg.replace('0.05', '0.12')} 0%, rgba(3,3,5,1) 100%)`
+    const category = resolveCategorySlug(post.category)
+    const gradientBg = `linear-gradient(135deg, ${CATEGORY_STYLES[category].bg.replace('0.05', '0.12')} 0%, rgba(3,3,5,1) 100%)`
+    const postDate = post.date ?? post.publishedAt ?? ''
+    const coverEmoji = post.coverEmoji ?? '✍️'
 
     if (variant === 'list') {
         return (
@@ -70,7 +73,7 @@
             className="flex items-center justify-center"
             style={{ background: gradientBg, minHeight: '320px' }}
             >
-            <span style={{ fontSize: '60px', opacity: 0.45 }}>{post.coverEmoji}</span>
+            <span style={{ fontSize: '60px', opacity: 0.45 }}>{coverEmoji}</span>
             </div>
             <div className="flex flex-col justify-between p-10">
             <div>
@@ -80,7 +83,7 @@
                     className="text-[10px]"
                     style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)', letterSpacing: '0.1em' }}
                 >
-                    {post.date}
+                    {postDate}
                 </span>
                 </div>
                 <h3
@@ -146,7 +149,7 @@
             className="w-full flex items-center justify-center"
             style={{ aspectRatio: '16/9', background: gradientBg }}
         >
-            <span style={{ fontSize: '40px', opacity: 0.5 }}>{post.coverEmoji}</span>
+            <span style={{ fontSize: '40px', opacity: 0.5 }}>{coverEmoji}</span>
         </div>
 
         {/* Card body */}

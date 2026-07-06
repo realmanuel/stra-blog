@@ -121,7 +121,7 @@
             ],
             preview: {
                 select: { title: 'text' },
-                prepare({ title }: { title: string }) {
+                prepare({ title }: Record<string, any>) {
                 return { title: `" ${title}"` }
                 },
             },
@@ -136,12 +136,7 @@
         media: 'coverImage',
         featured: 'featured',
         },
-        prepare({ title, author, media, featured }: {
-        title: string
-        author: string
-        media: unknown
-        featured: boolean
-        }) {
+        prepare({ title, author, media, featured }: Record<string, any>) {
         return {
             title: featured ? `⭐ ${title}` : title,
             subtitle: author,

@@ -10,65 +10,40 @@
 
     export default function BlogFooter() {
     return (
-        <footer style={{ borderTop: '1px solid rgba(242,240,235,0.08)' }}>
-
+        <footer className="border-t border-[#F2F0EB]/[0.08]">
         {/* Top row */}
-        <div
-            className="px-6 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-10"
-            style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
-        >
+        <div className="grid grid-cols-1 gap-10 px-6 py-12 md:grid-cols-3 md:px-12 md:py-16 border-b border-[#F2F0EB]/[0.08]">
+            
             {/* Brand */}
             <div>
-            <div className="flex items-center gap-3 mb-4">
-                <span
-                className="text-[20px] font-extrabold"
-                style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.02em' }}
-                >
-                STR<span style={{ color: '#C8FF00' }}>A</span>
+            <div className="mb-4 flex items-center gap-3">
+                <span className="font-[family-name:var(--font-syne)] text-[20px] font-extrabold tracking-[-0.02em] text-white">
+                STR<span className="text-[#C8FF00]">A</span>
                 </span>
-                <span style={{ width: '1px', height: '16px', background: 'rgba(242,240,235,0.15)', display: 'block' }} />
-                <span
-                className="text-[11px] uppercase tracking-[0.18em]"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
-                >
+                <span className="block h-4 w-px bg-[#F2F0EB]/15" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#F2F0EB]/40">
                 Journal
                 </span>
             </div>
-            <p
-                className="text-[11px] leading-[1.8] mb-5"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
-            >
+            <p className="mb-5 font-mono text-[11px] leading-[1.8] text-[#F2F0EB]/35">
                 The official Stra publication. Platform updates, product spotlights, seller features and marketplace insights.
             </p>
-            <span
-                className="text-[10px] uppercase tracking-[0.12em] px-3 py-2 inline-block"
-                style={{
-                fontFamily: 'var(--font-mono)',
-                color: 'rgba(242,240,235,0.25)',
-                border: '1px solid rgba(242,240,235,0.08)',
-                }}
-            >
+            <span className="inline-block border border-[#F2F0EB]/[0.08] px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#F2F0EB]/25">
                 Vol. 01 — 2026
             </span>
             </div>
 
             {/* Category links */}
             <div>
-            <div
-                className="text-[10px] uppercase tracking-[0.2em] mb-5"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
-            >
+            <div className="mb-5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#F2F0EB]/30">
                 Categories
             </div>
-            <ul className="flex flex-col gap-3 list-none">
+            <ul className="flex list-none flex-col gap-3">
                 {footerLinks.map((link) => (
                 <li key={link.href}>
                     <Link
                     href={link.href}
-                    className="text-[11px] uppercase tracking-[0.08em] no-underline transition-colors duration-200"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.4)')}
+                    className="font-mono text-[11px] uppercase tracking-[0.08em] text-[#F2F0EB]/40 no-underline transition-colors duration-200 hover:text-[#C8FF00]"
                     >
                     {link.label}
                     </Link>
@@ -79,13 +54,10 @@
 
             {/* Main site links */}
             <div>
-            <div
-                className="text-[10px] uppercase tracking-[0.2em] mb-5"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
-            >
+            <div className="mb-5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#F2F0EB]/30">
                 Stra Platform
             </div>
-            <ul className="flex flex-col gap-3 list-none">
+            <ul className="flex list-none flex-col gap-3">
                 {[
                 { label: 'Visit gestra.ng', href: 'https://www.gestra.ng' },
                 { label: 'How It Works', href: 'https://www.gestra.ng/how-it-works' },
@@ -98,14 +70,11 @@
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[11px] uppercase tracking-[0.08em] no-underline transition-colors duration-200"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.4)')}
+                    className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-[#F2F0EB]/40 no-underline transition-colors duration-200 hover:text-[#C8FF00]"
                     >
                     {link.label}
-                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0, opacity: 0.5 }}>
-                        <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" className="shrink-0 opacity-50">
+                        <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     </a>
                 </li>
@@ -115,13 +84,8 @@
         </div>
 
         {/* Bottom row */}
-        <div
-            className="px-6 md:px-12 py-6 flex flex-col md:flex-row items-center md:justify-between gap-4 text-center md:text-left"
-        >
-            <p
-            className="text-[10px] uppercase tracking-[0.08em]"
-            style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
-            >
+        <div className="flex flex-col items-center gap-4 px-6 py-6 text-center md:flex-row md:justify-between md:px-12 md:text-left">
+            <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#F2F0EB]/20">
             © 2026 Stra. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
@@ -129,10 +93,7 @@
                 href="https://www.gestra.ng/terms"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] uppercase tracking-[0.08em] no-underline transition-colors duration-200"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.5)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.2)')}
+                className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#F2F0EB]/20 no-underline transition-colors duration-200 hover:text-[#F2F0EB]/50"
             >
                 Terms
             </a>
@@ -140,18 +101,12 @@
                 href="https://www.gestra.ng/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] uppercase tracking-[0.08em] no-underline transition-colors duration-200"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.5)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.2)')}
+                className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#F2F0EB]/20 no-underline transition-colors duration-200 hover:text-[#F2F0EB]/50"
             >
                 Privacy
             </a>
             </div>
-            <p
-            className="text-[10px] uppercase tracking-[0.08em]"
-            style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.15)' }}
-            >
+            <p className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#F2F0EB]/15">
             A Stra Publication
             </p>
         </div>

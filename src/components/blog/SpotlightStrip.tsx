@@ -1,7 +1,8 @@
     import Link from 'next/link'
-    import { Post } from '@/lib/posts'
+    import { Post, resolveCategorySlug } from '@/lib/posts'
 
     export default function SpotlightStrip({ post }: { post: Post }) {
+    const coverEmoji = post.coverEmoji ?? '✍️'
     return (
         <div
         className="relative overflow-hidden px-6 md:px-12 py-14 md:py-16"
@@ -33,7 +34,7 @@
                 className="absolute top-0 left-0 right-0"
                 style={{ height: '2px', background: '#C8FF00' }}
             />
-            <span className="text-5xl">{post.coverEmoji}</span>
+            <span className="text-5xl">{coverEmoji}</span>
             <span
                 className="text-[11px] font-bold text-center px-3"
                 style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.01em' }}

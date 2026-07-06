@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
   title: {
     default: 'Stra Blog | Stories, Updates & Spotlights',
-    template: '%s | Stra Journal',
+    template: '%s | Stra Blog',
   },
 
   description:
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
   keywords: [
     'Stra blog',
-    'Stra journal',
+    'Stra Journal',
     'Nigeria marketplace news',
     'secondhand market Nigeria',
     'seller stories Nigeria',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     'buy sell Nigeria tips',
   ],
 
-  authors: [{ name: 'Stra Journal', url: BASE_URL }],
+  authors: [{ name: 'Stra Blog', url: BASE_URL }],
   creator: 'Stra',
   publisher: 'Stra',
 
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_NG',
     url: BASE_URL,
-    siteName: 'Stra Journal',
-    title: 'Stra Journal — Stories, Updates & Spotlights',
+    siteName: 'Stra Blog',
+    title: 'Stra Blog — Stories, Updates & Spotlights',
     description:
       'The official Stra publication. Platform updates, product spotlights, seller stories and marketplace insights.',
     images: [
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Stra Journal',
+        alt: 'Stra Blog',
         type: 'image/png',
       },
     ],

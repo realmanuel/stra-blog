@@ -8,20 +8,21 @@
     export interface Author {
     name: string
     role: string
-    avatar: string // emoji for now, becomes Sanity image URL later
+    avatar?: any
     }
 
     export interface Post {
     slug: string
     title: string
     excerpt: string
-    category: Category
-    date: string
-    readTime: string
+    category: Category | { slug?: string; title?: string } | any
+    date?: string
+    publishedAt?: string
+    readTime?: string
     author: Author
-    coverEmoji: string // placeholder until real images from Sanity
+    coverEmoji?: string
     featured?: boolean
-    body?: Block[]
+    body?: any[]
     }
 
     export interface Block {
@@ -44,6 +45,15 @@
     'seller-story': { color: '#FF8C42',  border: 'rgba(255,140,66,0.3)',  bg: 'rgba(255,140,66,0.05)'  },
     'tips':         { color: '#42D4FF',  border: 'rgba(66,212,255,0.3)',  bg: 'rgba(66,212,255,0.05)'  },
     'industry':     { color: 'rgba(242,240,235,0.5)', border: 'rgba(242,240,235,0.08)', bg: 'transparent' },
+    }
+
+    export function resolveCategorySlug(category: Post['category']): Category {
+    if (typeof category === 'string') {
+        return category as Category
+    }
+
+    const slug = typeof category === 'object' && category?.slug ? category.slug : ''
+    return (['update', 'spotlight', 'seller-story', 'tips', 'industry'].includes(slug) ? slug : 'industry') as Category
     }
 
     export const POSTS: Post[] = [

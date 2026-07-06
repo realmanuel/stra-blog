@@ -1,13 +1,14 @@
-    import { Category, CATEGORY_LABELS, CATEGORY_STYLES } from '@/lib/posts'
+    import { CATEGORY_LABELS, CATEGORY_STYLES, resolveCategorySlug } from '@/lib/posts'
 
     interface PostTagProps {
-    category: Category
+    category: string | { slug?: string } | undefined
     size?: 'sm' | 'md'
     }
 
     export default function PostTag({ category, size = 'md' }: PostTagProps) {
-    const style = CATEGORY_STYLES[category]
-    const label = CATEGORY_LABELS[category]
+    const normalizedCategory = resolveCategorySlug(category as any)
+    const style = CATEGORY_STYLES[normalizedCategory]
+    const label = CATEGORY_LABELS[normalizedCategory]
 
     return (
         <span
