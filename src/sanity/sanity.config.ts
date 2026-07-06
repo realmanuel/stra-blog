@@ -8,6 +8,10 @@
     title: 'Stra Blog',
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    
+    // ADD THIS LINE: Tells Sanity that /studio is the root URL
+    basePath: '/studio', 
+
     plugins: [
         structureTool({
         structure: (S) =>
