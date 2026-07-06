@@ -1,13 +1,23 @@
 import { serverClient } from './sanity.client'
 import type { SanityPost, SanityCategory } from './types'
 
-async function safeFetch<T>(query: string, params: Record<string, unknown> | undefined, fallback: T): Promise<T> {
+async function safeFetch<T>(
+  query: string, 
+  params: Record<string, unknown> | undefined, 
+  fallback: T
+): Promise<T> {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || !process.env.NEXT_PUBLIC_SANITY_DATASET) {
     return fallback
   }
 
   try {
-    return (await serverClient.fetch(query, params)) as T
+    // We add an empty object {} if params is undefined, 
+    // followed by our Next.js caching rules!
+    return (await serverClient.fetch(
+      query, 
+      params || {}, 
+      { next: { revalidate: 10 } } // <-- Refreshes the cache every 10 seconds
+    )) as T
   } catch (error) {
     console.warn('[sanity] query failed, falling back to empty data', error)
     return fallback
