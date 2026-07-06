@@ -81,8 +81,6 @@
                 href={`/blog/${post.slug}`}
                 className="flex items-center gap-2 text-[11px] uppercase tracking-[0.1em] no-underline transition-all duration-200 w-fit"
                 style={{ fontFamily: 'var(--font-mono)', color: '#C8FF00' }}
-                onMouseEnter={(e) => (e.currentTarget.style.gap = '14px')}
-                onMouseLeave={(e) => (e.currentTarget.style.gap = '8px')}
             >
                 Read the Story →
             </Link>

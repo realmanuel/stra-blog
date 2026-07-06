@@ -99,8 +99,6 @@ export default async function PostPage({
             href="/blog"
             className="text-[10px] uppercase tracking-[0.15em] no-underline transition-colors duration-200"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.35)')}
           >
             ← Stra Journal
           </a>
@@ -278,8 +276,6 @@ export default async function PostPage({
                         : 'none',
                       color: 'inherit',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.7')}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
                   >
                     <div className="mb-2">
                       <PostTag category={related.category?.slug as any} size="sm" />

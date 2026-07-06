@@ -11,7 +11,7 @@
         'The official Stra publication. Platform updates, product spotlights, seller stories, marketplace insights, and everything happening inside Nigeria\'s smartest secondhand market.',
     alternates: { canonical: `${BASE_URL}/blog` },
     openGraph: {
-        title: 'Stra Blog — Stories, Updates & Spotlights',
+        title: 'Stra Blog | Stories, Updates & Spotlights',
         description: 'The official Stra publication.',
         url: `${BASE_URL}/blog`,
         images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Stra Blog' }],

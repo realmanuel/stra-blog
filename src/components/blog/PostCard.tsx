@@ -23,8 +23,6 @@
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
             <div
             className="text-[10px] mb-4"
@@ -66,8 +64,6 @@
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
             <div
             className="flex items-center justify-center"
@@ -141,8 +137,6 @@
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
         {/* Card image */}
         <div
