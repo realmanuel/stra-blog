@@ -17,7 +17,7 @@
     if (variant === 'list') {
         return (
         <Link
-            href={`/blog/${post.slug}`}
+            href={`/${post.slug}`}
             className="reveal block no-underline transition-colors duration-300 p-7"
             style={{
             borderRight: '1px solid rgba(242,240,235,0.08)',
@@ -57,7 +57,7 @@
     if (variant === 'wide') {
         return (
         <Link
-            href={`/blog/${post.slug}`}
+            href={`/${post.slug}`}
             className="reveal grid no-underline transition-colors duration-300"
             style={{
             gridTemplateColumns: '1fr 1fr',
@@ -131,7 +131,7 @@
     // default card
     return (
         <Link
-        href={`/blog/${post.slug}`}
+        href={`/${post.slug}`}
         className="reveal block no-underline transition-colors duration-300"
         style={{
             borderRight: '1px solid rgba(242,240,235,0.08)',

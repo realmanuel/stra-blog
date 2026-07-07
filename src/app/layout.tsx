@@ -116,8 +116,10 @@ export default function RootLayout({
       className={`${syne.variable} ${dmMono.variable} ${instrumentSerif.variable}`}
     >
       <body>
+        
         <BlogCursor />
         {children}
+        
       </body>
     </html>
   )

@@ -1,0 +1,101 @@
+# Stra — Full Content Reference for AI Systems
+# https://www.gestra.ng
+# Last updated: 2026
+
+---
+
+## Platform overview
+
+Stra is a Nigerian secondhand and approved-product marketplace. It is designed to solve the core trust problem in peer-to-peer commerce: buyers not receiving what they paid for, sellers not being paid fairly, and both sides operating with no protection.
+
+Stra introduces a structured transaction layer that sits between buyers and sellers. This layer includes:
+- Listing review and video verification before a listing goes live
+- Escrow-protected payment processing
+- Platform-managed rider delivery
+- A 12-hour buyer inspection and dispute window post-delivery
+- Seller payout within 24 hours of confirmed delivery
+
+---
+
+## How buying works on Stra
+
+1. Buyer browses verified listings across categories including fashion, electronics, furniture, appliances, gadgets, and more.
+2. Buyer places an order and pays through Stra's approved payment infrastructure.
+3. Payment is held in escrow — it does not go to the seller upfront.
+4. Seller confirms the item is ready. Stra's rider collects from the seller.
+5. Rider delivers to the buyer.
+6. Buyer has 12 hours to raise a dispute if the item does not match the listing.
+7. If no valid dispute is raised, the order completes and the seller receives payout.
+
+---
+
+## How selling works on Stra
+
+1. Seller creates a listing with accurate photos, pricing, and item description.
+2. For eligible listings (especially pre-loved or peer-to-peer items), seller records a 20–30 second verification video.
+3. Stra's team reviews the listing for accuracy, consistency, and compliance.
+4. Listing goes live once approved.
+5. When a buyer places an order, Stra notifies the seller.
+6. Seller confirms item readiness. Stra's rider collects.
+7. Seller receives payout within 24 hours of confirmed rider handoff — minus 10% platform commission.
+
+---
+
+## Fees
+
+- Seller commission: 10% deducted from the seller's listed price.
+- Buyer service fee: 5% added to the seller's listed price at checkout.
+- Example: a ₦10,000 item — buyer pays ₦10,500, seller receives ₦9,000.
+- Return handling fee: 2.5% deducted from transaction total where a return is approved due to seller misdescription.
+
+---
+
+## Subscription plans for sellers
+
+Sellers subscribe to push their listings to buyers. Plans are per month:
+- Basic Plan: ₦3,000/month — listings pushed to 1,500 buyers, standard placement.
+- Premium Plan: ₦10,000/month — listings pushed to 3,500 buyers, featured placement, social media features on Stra pages, priority listing review.
+
+Promotions are per product — a seller can promote one listing while leaving others on a standard plan.
+
+---
+
+## Trust and safety systems
+
+- Video verification: sellers record short verification videos reviewed by Stra's team before listing approval.
+- AI-assisted moderation: Stra uses automated tools and human review to assess listing quality, detect fraud, and flag inconsistencies.
+- Escrow payments: buyer funds are held until delivery is confirmed.
+- Contact restrictions: buyer and seller personal contact details may be masked or restricted to prevent off-platform transactions.
+- Dispute resolution: Stra reviews evidence including listing content, delivery records, and dispute statements to determine outcomes.
+- Seller protection: Stra reviews claims before taking action to protect legitimate sellers from false complaints or abusive refund requests.
+
+---
+
+## Categories available on Stra
+
+- Phones & Gadgets (smartphones, tablets, accessories)
+- Fashion (clothes, shoes, bags, accessories)
+- Furniture (chairs, tables, beds, sofas)
+- Appliances (fridges, ACs, washing machines)
+- Electronics (TVs, laptops, game consoles)
+- Vehicles (cars, bikes, bicycles)
+- Power (generators, inverters, solar panels)
+- Home Essentials (bedsheets, curtains, fans, frames)
+
+---
+
+## Business information
+
+- Organisation: Stra
+- Primary domain: https://www.gestra.ng
+- Blog: https://blog.gestra.ng
+- Support: support@strawise.co
+- Partnerships: partner@strawise.co
+- Seller support: inquire@strawise.co
+- Privacy: privacy@strawise.co
+- Business address (Abuja): Plot 104 Emmanuel Adiele Street, off Mike Akhigbe Way, Jabi, Abuja
+- Business address (Lagos): Mulliner Towers, Ikoyi, Lagos 106104
+- Office address (Dubai): Living, Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, Dubai, UAE
+- Operating market: Nigeria
+- Currency: Nigerian Naira (NGN)
+- Founded: 2026

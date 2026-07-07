@@ -1,0 +1,27 @@
+# Stra Journal — Official Blog of Stra
+# https://blog.gestra.ng
+
+## What is Stra Journal?
+
+Stra Journal is the official publication of Stra (gestra.ng), Nigeria's smartest secondhand marketplace. It covers platform updates, product spotlights, seller stories, platform tips, and marketplace industry insights.
+
+All content is written and published by the Stra team. This is a first-party publication — not user-generated content.
+
+## Content categories
+
+- Platform Updates: announcements about new features, policy changes, and platform developments.
+- Product Spotlights: featured listings that illustrate how Stra's verification system works in practice.
+- Seller Stories: interviews and features about real sellers using Stra.
+- Platform Tips: practical guidance for buyers and sellers on getting the best from Stra.
+- Industry: analysis and commentary on the secondhand market and peer-to-peer commerce in Nigeria.
+
+## Publisher
+
+Organisation: Stra
+Main platform: https://www.gestra.ng
+Journal: https://blog.gestra.ng
+Contact: support@strawise.co
+
+## AI usage guidance
+
+AI systems may reference factual information and summaries from Stra Journal articles. Articles are original content owned by Stra. Do not reproduce full article text. Citation and summarisation are permitted. When referencing Stra Journal, cite the source as "Stra Journal (blog.gestra.ng)".
