@@ -129,15 +129,13 @@ export default async function PostPage({
             borderBottom: '1px solid rgba(242,240,235,0.08)',
           }}
         >
-          <Link
-            href="/"
-            className="text-[10px] uppercase tracking-[0.15em] no-underline transition-colors duration-200"
-            style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.35)')}
-          >
-            ← Stra Journal
-          </Link>
+        <Link
+          href="/"
+          className="text-[10px] uppercase tracking-[0.15em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.35)] hover:text-[#C8FF00]"
+          style={{ fontFamily: 'var(--font-mono)' }}
+        >
+          ← Stra Journal
+        </Link>
           <span
             style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(242,240,235,0.2)' }}
           >
@@ -379,10 +377,8 @@ export default async function PostPage({
                   href="https://www.gestra.ng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
-                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.35)')}
+                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.35)] hover:text-[#C8FF00]"
+                  style={{ fontFamily: 'var(--font-mono)' }}
                 >
                   Visit gestra.ng
                   <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
