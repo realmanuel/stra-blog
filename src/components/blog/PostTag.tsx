@@ -5,10 +5,19 @@
     size?: 'sm' | 'md'
     }
 
+    // 1. Create a neutral fallback style for unknown/missing categories
+    const FALLBACK_STYLE = {
+    bg: 'rgba(242,240,235,0.05)',
+    border: 'rgba(242,240,235,0.15)',
+    color: 'rgba(242,240,235,0.7)',
+    }
+
     export default function PostTag({ category, size = 'md' }: PostTagProps) {
     const normalizedCategory = resolveCategorySlug(category as any)
-    const style = CATEGORY_STYLES[normalizedCategory]
-    const label = CATEGORY_LABELS[normalizedCategory]
+    
+    // 2. Safely grab the style & label, or use the fallbacks if undefined
+    const style = CATEGORY_STYLES[normalizedCategory] || FALLBACK_STYLE
+    const label = CATEGORY_LABELS[normalizedCategory] || normalizedCategory || 'Uncategorized'
 
     return (
         <span
