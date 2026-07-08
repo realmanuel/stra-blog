@@ -21,6 +21,7 @@
         title: 'Avatar',
         type: 'image',
         options: { hotspot: true },
+        validation: (Rule) => Rule.required().error('An avatar is required to publish this post.'),
         }),
     ],
     })

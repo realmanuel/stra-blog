@@ -33,12 +33,20 @@
         validation: (Rule) => Rule.required(),
         }),
         defineField({
-        name: 'author',
-        title: 'Author',
-        type: 'reference',
-        to: [{ type: 'author' }],
-        validation: (Rule) => Rule.required(),
-        }),
+            name: 'coverImage',
+            title: 'Cover Image',
+            type: 'image',
+            options: { hotspot: true },
+            // validation line 
+            validation: (Rule) => Rule.required().error('A cover image is required to publish this post.'),
+            fields: [
+                defineField({
+                name: 'alt',
+                title: 'Alt Text',
+                type: 'string',
+                }),
+            ],
+            }),
         defineField({
         name: 'coverImage',
         title: 'Cover Image',

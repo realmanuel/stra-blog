@@ -61,7 +61,7 @@ export async function generateMetadata({
       type: 'article',
       publishedTime: post.publishedAt,
       authors: [post.author.name],
-      tags: [post.category.title],
+      tags: [post.category?.title || 'Uncategorized'],
       images: [
         {
           url: ogImage,
@@ -101,7 +101,7 @@ export default async function PostPage({
 
   // Parallel fetch for related + all posts
   const [related, allPosts] = await Promise.all([
-    getRelatedPosts(post.slug, post.category.slug, 2),
+    getRelatedPosts(post.slug, post.category?.slug || '', 2),
     getAllPosts(),
   ])
 
@@ -141,7 +141,7 @@ export default async function PostPage({
           >
             /
           </span>
-          <PostTag category={post.category.slug as Parameters<typeof PostTag>[0]['category']} />
+          <PostTag category={post.category?.slug as Parameters<typeof PostTag>[0]['category']} />
         </div>
 
         {/* ── Post hero ── */}
@@ -150,7 +150,7 @@ export default async function PostPage({
           style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
         >
           <div className="flex items-center gap-4 mb-8 flex-wrap">
-            <PostTag category={post.category.slug as Parameters<typeof PostTag>[0]['category']} />
+            <PostTag category={post.category?.slug as Parameters<typeof PostTag>[0]['category']} />
             <span
               className="text-[10px] tracking-[0.1em]"
               style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
