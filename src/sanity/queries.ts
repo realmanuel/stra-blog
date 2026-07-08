@@ -2,30 +2,39 @@ import { serverClient } from './sanity.client'
 import type { SanityPost, SanityCategory } from './types'
 
 async function safeFetch<T>(
-  query: string, 
-  params: Record<string, unknown> | undefined, 
+  query: string,
+  params: Record<string, unknown> | undefined,
   fallback: T
 ): Promise<T> {
-  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || !process.env.NEXT_PUBLIC_SANITY_DATASET) {
+  if (
+    !process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
+    !process.env.NEXT_PUBLIC_SANITY_DATASET
+  ) {
     return fallback
   }
 
   try {
-    return (await serverClient.fetch(
-      query,
-      params ?? {},
-      { next: { revalidate: 10 } }
-    )) as T
+    return (await serverClient.fetch(query, params ?? {}, {
+      next: { revalidate: 60 },
+    })) as T
   } catch (error) {
-    console.warn('[sanity] query failed, falling back to empty data', error)
+    console.warn('[sanity] query failed:', error)
     return fallback
   }
 }
 
-// All posts — newest first
+// Safe category projection — never drops a post because of a missing category
+const categoryProjection = `
+  "category": select(
+    defined(category->) => category-> { title, "slug": slug.current },
+    { "title": "Uncategorised", "slug": "uncategorised" }
+  )
+`
+
+// All posts — newest first, never drops posts with broken category refs
 export async function getAllPosts(): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(`
-    *[_type == "post"] | order(publishedAt desc) {
+  return safeFetch<SanityPost[]>(
+    `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
       _id,
       title,
       "slug": slug.current,
@@ -34,16 +43,18 @@ export async function getAllPosts(): Promise<SanityPost[]> {
       readTime,
       featured,
       coverImage { asset, alt },
-      category-> { title, "slug": slug.current },
+      ${categoryProjection},
       author-> { name, role, avatar }
-    }
-  `, undefined, [])
+    }`,
+    undefined,
+    []
+  )
 }
 
 // Single post by slug — includes full body
 export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
-  return safeFetch<SanityPost | null>(`
-    *[_type == "post" && slug.current == $slug][0] {
+  return safeFetch<SanityPost | null>(
+    `*[_type == "post" && slug.current == $slug][0] {
       _id,
       title,
       "slug": slug.current,
@@ -52,17 +63,19 @@ export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
       readTime,
       featured,
       coverImage { asset, alt },
-      category-> { title, "slug": slug.current },
+      ${categoryProjection},
       author-> { name, role, avatar },
       body
-    }
-  `, { slug }, null)
+    }`,
+    { slug },
+    null
+  )
 }
 
 // Featured post — most recent with featured: true
 export async function getFeaturedPost(): Promise<SanityPost | null> {
-  return safeFetch<SanityPost | null>(`
-    *[_type == "post" && featured == true] | order(publishedAt desc)[0] {
+  return safeFetch<SanityPost | null>(
+    `*[_type == "post" && featured == true && defined(slug.current)] | order(publishedAt desc)[0] {
       _id,
       title,
       "slug": slug.current,
@@ -71,16 +84,24 @@ export async function getFeaturedPost(): Promise<SanityPost | null> {
       readTime,
       featured,
       coverImage { asset, alt },
-      category-> { title, "slug": slug.current },
+      ${categoryProjection},
       author-> { name, role, avatar }
-    }
-  `, undefined, null)
+    }`,
+    undefined,
+    null
+  )
 }
 
 // Posts by category slug
-export async function getPostsByCategory(categorySlug: string): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(`
-    *[_type == "post" && category->slug.current == $categorySlug] | order(publishedAt desc) {
+export async function getPostsByCategory(
+  categorySlug: string
+): Promise<SanityPost[]> {
+  return safeFetch<SanityPost[]>(
+    `*[
+      _type == "post" &&
+      defined(slug.current) &&
+      category->slug.current == $categorySlug
+    ] | order(publishedAt desc) {
       _id,
       title,
       "slug": slug.current,
@@ -89,21 +110,24 @@ export async function getPostsByCategory(categorySlug: string): Promise<SanityPo
       readTime,
       featured,
       coverImage { asset, alt },
-      category-> { title, "slug": slug.current },
+      ${categoryProjection},
       author-> { name, role, avatar }
-    }
-  `, { categorySlug }, [])
+    }`,
+    { categorySlug },
+    []
+  )
 }
 
 // Related posts — same category, exclude current
 export async function getRelatedPosts(
   currentSlug: string,
   categorySlug: string,
-  limit: number = 3
+  limit: number = 2
 ): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(`
-    *[
+  return safeFetch<SanityPost[]>(
+    `*[
       _type == "post" &&
+      defined(slug.current) &&
       slug.current != $currentSlug &&
       category->slug.current == $categorySlug
     ] | order(publishedAt desc)[0...$limit] {
@@ -114,27 +138,35 @@ export async function getRelatedPosts(
       publishedAt,
       readTime,
       coverImage { asset, alt },
-      category-> { title, "slug": slug.current },
+      ${categoryProjection},
       author-> { name, role, avatar }
-    }
-  `, { currentSlug, categorySlug, limit }, [])
+    }`,
+    { currentSlug, categorySlug, limit },
+    []
+  )
 }
 
 // All categories
 export async function getAllCategories(): Promise<SanityCategory[]> {
-  return safeFetch<SanityCategory[]>(`
-    *[_type == "category"] | order(title asc) {
+  return safeFetch<SanityCategory[]>(
+    `*[_type == "category" && defined(slug.current)] | order(title asc) {
       _id,
       title,
       "slug": slug.current,
       description
-    }
-  `, undefined, [])
+    }`,
+    undefined,
+    []
+  )
 }
 
 // All slugs for generateStaticParams
 export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
-  return safeFetch<{ slug: string }[]>(`
-    *[_type == "post"] { "slug": slug.current }
-  `, undefined, [])
+  return safeFetch<{ slug: string }[]>(
+    `*[_type == "post" && defined(slug.current)] {
+      "slug": slug.current
+    }`,
+    undefined,
+    []
+  )
 }
