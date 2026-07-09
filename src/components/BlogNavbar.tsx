@@ -96,7 +96,7 @@
 
             {/* Desktop right */}
             <div className="hidden md:flex items-center gap-5 flex-shrink-0">
-            
+            <a
                 href="https://www.gestra.ng"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -269,15 +269,13 @@
                 transform: menuOpen ? 'translateY(0)' : 'translateY(10px)',
             }}
             >
-            
+            <a
                 href="https://www.gestra.ng"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={close}
                 className="flex items-center justify-center gap-2 w-full text-[11px] uppercase tracking-[0.12em] no-underline transition-all duration-200"
                 style={{ fontFamily: 'var(--font-mono)', color: '#030305', background: '#C8FF00', padding: '14px 20px' }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#d4ff1a')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#C8FF00')}
             >
                 Visit gestra.ng
                 <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
