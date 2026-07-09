@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { media } from 'sanity-plugin-media'
 import { schemaTypes } from './schema'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
@@ -23,8 +24,9 @@ export default defineConfig({
               .child(
                 S.documentTypeList('post')
                   .title('All Posts')
+                  // FIXED: Added the required "by" wrapper array structure
                   .defaultOrdering([
-                    { field: 'publishedAt', direction: 'desc' },
+                    { by: [{ field: 'publishedAt', direction: 'desc' }] }
                   ])
               ),
             S.divider(),
@@ -37,6 +39,7 @@ export default defineConfig({
           ]),
     }),
     visionTool(),
+    media(),
   ],
 
   schema: {
