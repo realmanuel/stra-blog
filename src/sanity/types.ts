@@ -1,10 +1,19 @@
+export interface SanityImageAsset {
+  _ref: string
+  _type: 'reference'
+}
+
 export interface SanityImage {
-  asset: {
-    _ref: string
-    _type: string
-  }
+  _type: 'image'
+  asset: SanityImageAsset
   alt?: string
   caption?: string
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
 }
 
 export interface SanityCategory {
@@ -15,32 +24,53 @@ export interface SanityCategory {
 }
 
 export interface SanityAuthor {
+  _id: string
   name: string
-  role: string
+  role?: string
   avatar?: SanityImage
 }
 
-export interface SanityBlock {
-  _type: 'block' | 'image' | 'callout'
+// Portable Text block types
+export interface SanitySpan {
+  _type: 'span'
   _key: string
-  style?: string
-  children?: Array<{
-    _type: string
-    _key: string
-    text: string
-    marks: string[]
-  }>
-  markDefs?: unknown[]
-  // image block
-  asset?: unknown
+  text: string
+  marks: string[]
+}
+
+export interface SanityMarkDef {
+  _type: string
+  _key: string
+  href?: string
+}
+
+export interface SanityTextBlock {
+  _type: 'block'
+  _key: string
+  style: 'normal' | 'h2' | 'h3' | 'blockquote'
+  children: SanitySpan[]
+  markDefs: SanityMarkDef[]
+}
+
+export interface SanityImageBlock {
+  _type: 'image'
+  _key: string
+  asset: SanityImageAsset
   alt?: string
   caption?: string
-  // callout block
-  text?: string
 }
+
+export interface SanityCalloutBlock {
+  _type: 'callout'
+  _key: string
+  text: string
+}
+
+export type SanityBlock = SanityTextBlock | SanityImageBlock | SanityCalloutBlock
 
 export interface SanityPost {
   _id: string
+  _updatedAt: string
   title: string
   slug: string
   excerpt: string
@@ -51,4 +81,17 @@ export interface SanityPost {
   category: SanityCategory
   author: SanityAuthor
   body?: SanityBlock[]
+}
+
+export interface SanityPostStub {
+  _id: string
+  title: string
+  slug: string
+  excerpt: string
+  publishedAt: string
+  readTime?: string
+  featured?: boolean
+  coverImage?: SanityImage
+  category: SanityCategory
+  author: Pick<SanityAuthor, 'name' | 'role' | 'avatar'>
 }

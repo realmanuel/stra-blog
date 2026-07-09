@@ -1,26 +1,39 @@
-    'use client'
+'use client'
 
-    import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-    export function useScrollReveal() {
-    useEffect(() => {
-        const reveals = document.querySelectorAll<HTMLElement>('.reveal')
+export function useScrollReveal(
+  selector = '.reveal',
+  options: IntersectionObserverInit = {}
+) {
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
-        const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                entry.target.classList.add('visible')
-                }, (i % 4) * 100)
-                observer.unobserve(entry.target)
-            }
-            })
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
-        )
-
-        reveals.forEach((el) => observer.observe(el))
-        return () => observer.disconnect()
-    }, [])
+  useEffect(() => {
+    const defaultOptions: IntersectionObserverInit = {
+      threshold: 0.08,
+      rootMargin: '0px 0px -48px 0px',
+      ...options,
     }
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger delay per batch of 4
+          const delay = (i % 4) * 90
+          setTimeout(() => {
+            entry.target.classList.add('visible')
+          }, delay)
+          observerRef.current?.unobserve(entry.target)
+        }
+      })
+    }, defaultOptions)
+
+    const elements = document.querySelectorAll<HTMLElement>(selector)
+    elements.forEach((el) => observerRef.current?.observe(el))
+
+    return () => {
+      observerRef.current?.disconnect()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selector])
+}

@@ -16,39 +16,41 @@
 
         const onMove = (e: MouseEvent) => {
         mousePos.current = { x: e.clientX, y: e.clientY }
-        cursor.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`
+        cursor.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`
         }
 
         const animateRing = () => {
-        ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.1
-        ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.1
-        ring.style.transform = `translate(${ringPos.current.x - 16}px, ${ringPos.current.y - 16}px)`
+        ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.12
+        ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.12
+        ring.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px)`
         rafRef.current = requestAnimationFrame(animateRing)
         }
 
-        const onEnterLink = () => {
-        cursor.classList.add('cursor--link')
-        ring.classList.add('cursor-ring--link')
+        const onEnter = () => {
+        ring.style.width = '60px'
+        ring.style.height = '60px'
         }
 
-        const onLeaveLink = () => {
-        cursor.classList.remove('cursor--link')
-        ring.classList.remove('cursor-ring--link')
+        const onLeave = () => {
+        ring.style.width = '40px'
+        ring.style.height = '40px'
         }
 
-        const attachToLinks = () => {
+        const attachListeners = () => {
         document.querySelectorAll('a, button').forEach((el) => {
-            el.addEventListener('mouseenter', onEnterLink)
-            el.addEventListener('mouseleave', onLeaveLink)
+            el.removeEventListener('mouseenter', onEnter)
+            el.removeEventListener('mouseleave', onLeave)
+            el.addEventListener('mouseenter', onEnter)
+            el.addEventListener('mouseleave', onLeave)
         })
         }
 
         document.addEventListener('mousemove', onMove)
-        attachToLinks()
+        attachListeners()
         rafRef.current = requestAnimationFrame(animateRing)
 
-        // Re-attach when DOM updates (for dynamic content)
-        const observer = new MutationObserver(attachToLinks)
+        // Re-attach when DOM mutates (dynamic content)
+        const observer = new MutationObserver(attachListeners)
         observer.observe(document.body, { childList: true, subtree: true })
 
         return () => {
@@ -60,8 +62,8 @@
 
     return (
         <>
-        <div ref={cursorRef} className="cursor" />
-        <div ref={ringRef} className="cursor-ring" />
+        <div ref={cursorRef} className="cursor" aria-hidden="true" />
+        <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
         </>
     )
     }

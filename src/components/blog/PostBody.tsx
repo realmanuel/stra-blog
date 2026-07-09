@@ -1,55 +1,79 @@
-    import { PortableText } from 'next-sanity'
-    import type { SanityBlock } from '@/sanity/types'
-    import { urlFor } from '@/sanity/sanity.client'
+    import { PortableText, type PortableTextComponents } from 'next-sanity'
     import Image from 'next/image'
+    import { urlFor } from '@/sanity/sanity.client'
+    import type { SanityBlock } from '@/sanity/types'
 
-    const components = {
+    const components: PortableTextComponents = {
     block: {
-        normal: ({ children }: { children?: React.ReactNode }) => (
+        normal: ({ children }) => (
         <p
-            className="mb-6"
+            className="mb-6 last:mb-0"
             style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '14px',
-            lineHeight: '2',
+            lineHeight: '2.05',
             color: 'rgba(242,240,235,0.65)',
             }}
         >
             {children}
         </p>
         ),
-        h2: ({ children }: { children?: React.ReactNode }) => (
+        h2: ({ children }) => (
         <h2
-            className="font-bold mt-12 mb-5"
+            className="font-bold mt-14 mb-5 first:mt-0"
             style={{
             fontFamily: 'var(--font-syne)',
-            fontSize: '26px',
+            fontSize: 'clamp(20px, 2.5vw, 28px)',
             letterSpacing: '-0.02em',
+            lineHeight: 1.15,
             color: '#F2F0EB',
             }}
         >
             {children}
         </h2>
         ),
-        h3: ({ children }: { children?: React.ReactNode }) => (
+        h3: ({ children }) => (
         <h3
-            className="font-bold mt-8 mb-4"
+            className="font-bold mt-10 mb-4 first:mt-0"
             style={{
             fontFamily: 'var(--font-syne)',
-            fontSize: '20px',
+            fontSize: 'clamp(17px, 2vw, 22px)',
             letterSpacing: '-0.01em',
+            lineHeight: 1.2,
             color: '#F2F0EB',
             }}
         >
             {children}
         </h3>
         ),
+        blockquote: ({ children }) => (
+        <blockquote
+            className="my-10 px-7 py-6"
+            style={{
+            borderLeft: '2px solid #C8FF00',
+            background: 'rgba(200,255,0,0.03)',
+            }}
+        >
+            <p
+            style={{
+                fontFamily: 'var(--font-serif)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(17px, 2vw, 21px)',
+                lineHeight: 1.65,
+                color: '#F2F0EB',
+                margin: 0,
+            }}
+            >
+            {children}
+            </p>
+        </blockquote>
+        ),
     },
     marks: {
-        strong: ({ children }: { children?: React.ReactNode }) => (
+        strong: ({ children }) => (
         <strong style={{ color: '#F2F0EB', fontWeight: 600 }}>{children}</strong>
         ),
-        em: ({ children }: { children?: React.ReactNode }) => (
+        em: ({ children }) => (
         <em
             style={{
             fontFamily: 'var(--font-serif)',
@@ -60,55 +84,88 @@
             {children}
         </em>
         ),
+        link: ({ children, value }) => (
+        <a
+            href={value?.href}
+            target={value?.blank ? '_blank' : undefined}
+            rel={value?.blank ? 'noopener noreferrer' : undefined}
+            style={{ color: '#C8FF00', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#d4ff1a')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#C8FF00')}
+        >
+            {children}
+        </a>
+        ),
     },
     types: {
-        image: ({ value }: { value: SanityBlock & { asset: unknown; alt?: string; caption?: string } }) => (
-        <figure className="my-10">
-            <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
-            <Image
+        image: ({ value }) => {
+        if (!value?.asset) return null
+        return (
+            <figure className="my-10">
+            <div
+                className="relative w-full overflow-hidden"
+                style={{ aspectRatio: '16/9' }}
+            >
+                <Image
                 src={urlFor(value).width(1200).url()}
                 alt={value.alt ?? ''}
                 fill
                 className="object-cover"
-            />
+                sizes="(max-width: 768px) 100vw, 700px"
+                />
             </div>
             {value.caption && (
-            <figcaption
+                <figcaption
                 className="mt-3 text-center text-[11px]"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
-            >
+                style={{
+                    fontFamily: 'var(--font-mono)',
+                    color: 'rgba(242,240,235,0.35)',
+                    letterSpacing: '0.05em',
+                }}
+                >
                 {value.caption}
-            </figcaption>
+                </figcaption>
             )}
-        </figure>
-        ),
-        callout: ({ value }: { value: { text: string } }) => (
-        <blockquote
-            className="my-8 px-7 py-5"
+            </figure>
+        )
+        },
+        callout: ({ value }) => {
+        if (!value?.text) return null
+        return (
+            <blockquote
+            className="my-10 px-7 py-6"
             style={{
-            borderLeft: '2px solid #C8FF00',
-            background: 'rgba(200,255,0,0.03)',
+                borderLeft: '2px solid #C8FF00',
+                background: 'rgba(200,255,0,0.03)',
             }}
-        >
+            >
             <p
-            style={{
+                style={{
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'italic',
-                fontSize: '20px',
-                lineHeight: '1.6',
+                fontSize: 'clamp(17px, 2vw, 21px)',
+                lineHeight: 1.65,
                 color: '#F2F0EB',
-            }}
+                margin: 0,
+                }}
             >
-            {value.text}
+                {value.text}
             </p>
-        </blockquote>
-        ),
+            </blockquote>
+        )
+        },
     },
     }
 
-    export default function PostBody({ blocks }: { blocks: SanityBlock[] }) {
+    interface PostBodyProps {
+    blocks: SanityBlock[]
+    }
+
+    export default function PostBody({ blocks }: PostBodyProps) {
+    if (!blocks?.length) return null
+
     return (
-        <div>
+        <div className="max-w-[680px]">
         <PortableText value={blocks as any} components={components} />
         </div>
     )

@@ -1,172 +1,201 @@
-import { serverClient } from './sanity.client'
-import type { SanityPost, SanityCategory } from './types'
+import { sanityFetch } from './sanity.client'
+import type { SanityPost, SanityPostStub, SanityCategory } from './types'
 
-async function safeFetch<T>(
-  query: string,
-  params: Record<string, unknown> | undefined,
-  fallback: T
-): Promise<T> {
-  if (
-    !process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
-    !process.env.NEXT_PUBLIC_SANITY_DATASET
-  ) {
-    return fallback
-  }
+// ─────────────────────────────────────────────
+// GROQ fragments — reused across queries
+// ─────────────────────────────────────────────
 
-  try {
-    return (await serverClient.fetch(query, params ?? {}, {
-      next: { revalidate: 60 },
-    })) as T
-  } catch (error) {
-    console.warn('[sanity] query failed:', error)
-    return fallback
-  }
-}
-
-// Safe category projection — never drops a post because of a missing category
-const categoryProjection = `
+// Safe category projection — if the referenced category doc is missing
+// or unpublished, the post is NOT dropped. It gets an Uncategorised fallback.
+const CATEGORY_FRAGMENT = /* groq */ `
   "category": select(
-    defined(category->) => category-> { title, "slug": slug.current },
-    { "title": "Uncategorised", "slug": "uncategorised" }
+    defined(category->_id) => {
+      "_id": category->_id,
+      "title": category->title,
+      "slug": category->slug.current
+    },
+    {
+      "_id": "uncategorised",
+      "title": "Uncategorised",
+      "slug": "uncategorised"
+    }
   )
 `
 
-// All posts — newest first, never drops posts with broken category refs
-export async function getAllPosts(): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(
-    `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
-      _id,
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishedAt,
-      readTime,
-      featured,
-      coverImage { asset, alt },
-      ${categoryProjection},
-      author-> { name, role, avatar }
-    }`,
-    undefined,
-    []
+// Safe author projection — same pattern
+const AUTHOR_FRAGMENT = /* groq */ `
+  "author": select(
+    defined(author->_id) => {
+      "_id": author->_id,
+      "name": author->name,
+      "role": author->role,
+      "avatar": author->avatar
+    },
+    {
+      "_id": "unknown",
+      "name": "Stra Team",
+      "role": "Official"
+    }
   )
+`
+
+// Fields shared between stub (list) and full post queries
+const POST_STUB_FIELDS = /* groq */ `
+  _id,
+  _updatedAt,
+  title,
+  "slug": slug.current,
+  excerpt,
+  publishedAt,
+  readTime,
+  featured,
+  coverImage { asset, alt },
+  ${CATEGORY_FRAGMENT},
+  ${AUTHOR_FRAGMENT}
+`
+
+// ─────────────────────────────────────────────
+// Queries
+// ─────────────────────────────────────────────
+
+// All published posts, newest first
+// Only includes posts with a valid slug
+export async function getAllPosts(): Promise<SanityPostStub[]> {
+  return sanityFetch<SanityPostStub[]>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        defined(slug.current) &&
+        defined(publishedAt)
+      ] | order(publishedAt desc) {
+        ${POST_STUB_FIELDS}
+      }
+    `,
+    revalidate: 60,
+    fallback: [],
+  })
 }
 
-// Single post by slug — includes full body
+// Single featured post — most recently published featured post
+export async function getFeaturedPost(): Promise<SanityPostStub | null> {
+  return sanityFetch<SanityPostStub | null>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        defined(slug.current) &&
+        defined(publishedAt) &&
+        featured == true
+      ] | order(publishedAt desc)[0] {
+        ${POST_STUB_FIELDS}
+      }
+    `,
+    revalidate: 60,
+    fallback: null,
+  })
+}
+
+// Single post by slug — full body included
 export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
-  return safeFetch<SanityPost | null>(
-    `*[_type == "post" && slug.current == $slug][0] {
-      _id,
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishedAt,
-      readTime,
-      featured,
-      coverImage { asset, alt },
-      ${categoryProjection},
-      author-> { name, role, avatar },
-      body
-    }`,
-    { slug },
-    null
-  )
-}
-
-// Featured post — most recent with featured: true
-export async function getFeaturedPost(): Promise<SanityPost | null> {
-  return safeFetch<SanityPost | null>(
-    `*[_type == "post" && featured == true && defined(slug.current)] | order(publishedAt desc)[0] {
-      _id,
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishedAt,
-      readTime,
-      featured,
-      coverImage { asset, alt },
-      ${categoryProjection},
-      author-> { name, role, avatar }
-    }`,
-    undefined,
-    null
-  )
+  return sanityFetch<SanityPost | null>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        slug.current == $slug &&
+        defined(publishedAt)
+      ][0] {
+        ${POST_STUB_FIELDS},
+        body[] {
+          ...,
+          _type == "image" => {
+            ...,
+            asset->
+          }
+        }
+      }
+    `,
+    params: { slug },
+    revalidate: 60,
+    fallback: null,
+  })
 }
 
 // Posts by category slug
 export async function getPostsByCategory(
   categorySlug: string
-): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(
-    `*[
-      _type == "post" &&
-      defined(slug.current) &&
-      category->slug.current == $categorySlug
-    ] | order(publishedAt desc) {
-      _id,
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishedAt,
-      readTime,
-      featured,
-      coverImage { asset, alt },
-      ${categoryProjection},
-      author-> { name, role, avatar }
-    }`,
-    { categorySlug },
-    []
-  )
+): Promise<SanityPostStub[]> {
+  return sanityFetch<SanityPostStub[]>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        defined(slug.current) &&
+        defined(publishedAt) &&
+        category->slug.current == $categorySlug
+      ] | order(publishedAt desc) {
+        ${POST_STUB_FIELDS}
+      }
+    `,
+    params: { categorySlug },
+    revalidate: 60,
+    fallback: [],
+  })
 }
 
-// Related posts — same category, exclude current
+// Related posts — same category, exclude current slug, max 3
 export async function getRelatedPosts(
   currentSlug: string,
-  categorySlug: string,
-  limit: number = 2
-): Promise<SanityPost[]> {
-  return safeFetch<SanityPost[]>(
-    `*[
-      _type == "post" &&
-      defined(slug.current) &&
-      slug.current != $currentSlug &&
-      category->slug.current == $categorySlug
-    ] | order(publishedAt desc)[0...$limit] {
-      _id,
-      title,
-      "slug": slug.current,
-      excerpt,
-      publishedAt,
-      readTime,
-      coverImage { asset, alt },
-      ${categoryProjection},
-      author-> { name, role, avatar }
-    }`,
-    { currentSlug, categorySlug, limit },
-    []
-  )
+  categorySlug: string
+): Promise<SanityPostStub[]> {
+  return sanityFetch<SanityPostStub[]>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        defined(slug.current) &&
+        defined(publishedAt) &&
+        slug.current != $currentSlug &&
+        category->slug.current == $categorySlug
+      ] | order(publishedAt desc)[0..2] {
+        ${POST_STUB_FIELDS}
+      }
+    `,
+    params: { currentSlug, categorySlug },
+    revalidate: 60,
+    fallback: [],
+  })
 }
 
-// All categories
+// All categories with at least one published post
 export async function getAllCategories(): Promise<SanityCategory[]> {
-  return safeFetch<SanityCategory[]>(
-    `*[_type == "category" && defined(slug.current)] | order(title asc) {
-      _id,
-      title,
-      "slug": slug.current,
-      description
-    }`,
-    undefined,
-    []
-  )
+  return sanityFetch<SanityCategory[]>({
+    query: /* groq */ `
+      *[
+        _type == "category" &&
+        defined(slug.current) &&
+        count(*[_type == "post" && references(^._id) && defined(publishedAt)]) > 0
+      ] | order(title asc) {
+        _id,
+        title,
+        "slug": slug.current,
+        description
+      }
+    `,
+    revalidate: 60,
+    fallback: [],
+  })
 }
 
-// All slugs for generateStaticParams
+// All slugs for generateStaticParams at build time
 export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
-  return safeFetch<{ slug: string }[]>(
-    `*[_type == "post" && defined(slug.current)] {
-      "slug": slug.current
-    }`,
-    undefined,
-    []
-  )
+  return sanityFetch<{ slug: string }[]>({
+    query: /* groq */ `
+      *[
+        _type == "post" &&
+        defined(slug.current) &&
+        defined(publishedAt)
+      ] {
+        "slug": slug.current
+      }
+    `,
+    revalidate: 3600,
+    fallback: [],
+  })
 }
