@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  transpilePackages: ['next-sanity'],
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        'swr': 'swr',
+      },
+    },
+  },
 }
 
 export default nextConfig
