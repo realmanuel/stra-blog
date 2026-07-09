@@ -1,7 +1,11 @@
-'use client'
-
+/**
+ * Sanity Studio — accessed at /studio
+ * Protected by Sanity's own auth. Do NOT add public routing to this.
+ */
 import { NextStudio } from 'next-sanity/studio'
 import config from '@/sanity/sanity.config'
+
+export const dynamic = 'force-dynamic'
 
 export default function StudioPage() {
   return <NextStudio config={config} />

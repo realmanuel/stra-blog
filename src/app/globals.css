@@ -2,7 +2,7 @@
 
 @theme {
   --color-black: #030305;
-  --color-white-cream: #F2F0EB;
+  --color-cream: #F2F0EB;
   --color-accent: #C8FF00;
   --color-accent2: #FF3D00;
   --color-muted: #1A1A22;
@@ -13,7 +13,9 @@
   --font-serif: 'Instrument Serif', serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -21,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -29,6 +32,14 @@ body {
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Focus styles — accessibility ── */
+:focus-visible {
+  outline: 2px solid #C8FF00;
+  outline-offset: 3px;
 }
 
 /* ── Custom cursor ── */
@@ -44,6 +55,7 @@ body {
   z-index: 9999;
   transition: transform 0.15s ease;
   mix-blend-mode: difference;
+  will-change: transform;
 }
 
 .cursor-ring {
@@ -56,24 +68,14 @@ body {
   left: 0;
   pointer-events: none;
   z-index: 9998;
-  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), width 0.3s, height 0.3s;
+  transition:
+    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    width 0.3s ease,
+    height 0.3s ease;
+  will-change: transform;
 }
 
-/* Mobile cursor hide */
-@media (hover: none) {
-  .cursor,
-  .cursor-ring {
-    display: none;
-  }
-  body {
-    cursor: auto;
-  }
-  a, button {
-    cursor: pointer;
-  }
-}
-
-/* ── Noise overlay — lighter than main site ── */
+/* ── Noise overlay — subtle texture ── */
 body::before {
   content: '';
   position: fixed;
@@ -81,7 +83,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9000;
-  opacity: 0.25;
+  opacity: 0.28;
 }
 
 /* ── Scroll reveal ── */
@@ -96,15 +98,16 @@ body::before {
   transform: translateY(0);
 }
 
-/* ── Animations ── */
+/* ── Entry animations ── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeUp-1 { animation: fadeUp 0.7s ease 0.1s both; }
@@ -112,16 +115,69 @@ body::before {
 .animate-fadeUp-3 { animation: fadeUp 0.7s ease 0.4s both; }
 .animate-fadeUp-4 { animation: fadeUp 0.7s ease 0.55s both; }
 
-/* ── Mobile ── */
+/* ── Scrollbar — subtle ── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030305;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(242, 240, 235, 0.12);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(242, 240, 235, 0.2);
+}
+
+/* ── Hide scrollbar on category bar ── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(200, 255, 0, 0.25);
+  color: #F2F0EB;
+}
+
+/* ── Mobile — restore default cursor, hide custom ── */
 @media (hover: none) {
   .cursor,
   .cursor-ring {
     display: none;
   }
+
   body {
     cursor: auto;
   }
-  a, button {
+
+  a,
+  button {
     cursor: pointer;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
