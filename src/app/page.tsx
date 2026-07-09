@@ -1,5 +1,6 @@
   import type { Metadata } from 'next'
   import BlogNavbar from '@/components/BlogNavbar'
+  import Link from 'next/link'
   import BlogFooter from '@/components/BlogFooter'
   import BlogHero from '@/components/blog/BlogHero'
   import PostCard from '@/components/blog/PostCard'
@@ -267,13 +268,13 @@
         >
           No posts found.
         </p>
-        <a
+        <Link
           href="/"
           className="text-[11px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
           style={{ fontFamily: 'var(--font-mono)', color: '#C8FF00' }}
         >
           ← View all posts
-        </a>
+        </Link>
       </div>
     )
   }
