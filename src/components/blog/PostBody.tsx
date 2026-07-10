@@ -2,7 +2,7 @@
     import Image from 'next/image'
     import type { SanityBlock } from '@/sanity/types'
 import { createImageUrlBuilder } from '@sanity/image-url'
-
+import { urlFor } from '@/sanity/sanity.client'
 
 
     const components: PortableTextComponents = {
@@ -107,7 +107,7 @@ import { createImageUrlBuilder } from '@sanity/image-url'
                 style={{ aspectRatio: '16/9' }}
             >
                 <Image
-                src={createImageUrlBuilder(value).width(1200).url()}
+                src={urlFor(value).width(1200).url()}
                 alt={value.alt ?? ''}
                 fill
                 className="object-cover"

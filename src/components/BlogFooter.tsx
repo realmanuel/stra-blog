@@ -143,10 +143,9 @@
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[10px] uppercase tracking-[0.08em] no-underline transition-colors duration-200"
+                    className="text-[10px] uppercase tracking-[0.08em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.45)] hover:text-[#F2F0EB] transition-colors"
                     style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.5)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.2)')}
+                
                     >
                     {link.label}
                     </a>

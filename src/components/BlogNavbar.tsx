@@ -1,4 +1,3 @@
-    'use client'
 
     import { useState, useEffect, useCallback } from 'react'
     import Link from 'next/link'
@@ -83,10 +82,9 @@
                 <li key={link.href}>
                 <Link
                     href={link.href}
-                    className="text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
+                    className="text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.45)] hover:text-[#F2F0EB] transition-colors"
                     style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.45)' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#F2F0EB')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.45)')}
+                
                 >
                     {link.label}
                 </Link>
@@ -102,8 +100,6 @@
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.4)')}
             >
                 gestra.ng
                 <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -215,8 +211,6 @@
                 onClick={close}
                 className="p-2 -mr-2 transition-colors duration-200"
                 style={{ cursor: 'none', background: 'transparent', border: 'none', color: 'rgba(242,240,235,0.4)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.4)')}
             >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -246,10 +240,9 @@
                     <Link
                     href={link.href}
                     onClick={close}
-                    className="flex items-center justify-between py-5 no-underline transition-colors duration-200"
+                    className="flex items-center justify-between py-5 no-underline transition-colors duration-200  text-[rgba(242,240,235,0.45)] hover:text-[#F2F0EB] transition-colors"
                     style={{ fontFamily: 'var(--font-syne)', color: 'rgba(242,240,235,0.55)', fontSize: '15px', fontWeight: 600, letterSpacing: '-0.01em' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#F2F0EB')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.55)')}
+                    
                     >
                     {link.label}
                     <span style={{ color: '#C8FF00', fontSize: '12px' }} aria-hidden="true">→</span>

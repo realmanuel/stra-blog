@@ -59,8 +59,6 @@
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
             <time
             dateTime={post.publishedAt}
@@ -99,14 +97,12 @@
         return (
         <Link
             href={href}
-            className="group grid no-underline transition-colors duration-300"
+            className="group block no-underline transition-colors duration-300 hover:bg-[rgba(242,240,235,0.02)]"
             style={{
             gridTemplateColumns: '1fr 1fr',
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
             <CardImage post={post} aspectRatio="auto" minHeight="320px" />
             <div className="flex flex-col justify-between p-10">
@@ -171,13 +167,11 @@
         return (
         <Link
             href={href}
-            className="group flex flex-col no-underline transition-colors duration-300"
+            className="group block no-underline transition-colors duration-300 hover:bg-[rgba(242,240,235,0.02)]"
             style={{
             borderLeft: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
             <CardImage post={post} aspectRatio="auto" minHeight="200px" />
             <div
@@ -234,13 +228,12 @@
     return (
         <Link
         href={href}
-        className="group block no-underline transition-colors duration-300"
+        className="group block no-underline transition-colors duration-300 hover:bg-[rgba(242,240,235,0.02)]"
         style={{
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(242,240,235,0.02)')}
-        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+        
         >
         <CardImage post={post} />
 
