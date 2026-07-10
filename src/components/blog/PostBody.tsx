@@ -1,7 +1,7 @@
     import { PortableText, type PortableTextComponents } from 'next-sanity'
     import Image from 'next/image'
-    import { urlFor } from '@/sanity/sanity.client'
     import type { SanityBlock } from '@/sanity/types'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
     const components: PortableTextComponents = {
     block: {
@@ -86,14 +86,12 @@
         ),
         link: ({ children, value }) => (
         <a
-            href={value?.href}
-            target={value?.blank ? '_blank' : undefined}
-            rel={value?.blank ? 'noopener noreferrer' : undefined}
-            style={{ color: '#C8FF00', textDecoration: 'underline', textUnderlineOffset: '3px' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#d4ff1a')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#C8FF00')}
+        href={value?.href}
+        target={value?.blank ? '_blank' : undefined}
+        rel={value?.blank ? 'noopener noreferrer' : undefined}
+        className="text-[#C8FF00] underline underline-offset-[3px] hover:text-[#d4ff1a] transition-colors"
         >
-            {children}
+        {children}
         </a>
         ),
     },
@@ -107,7 +105,7 @@
                 style={{ aspectRatio: '16/9' }}
             >
                 <Image
-                src={urlFor(value).width(1200).url()}
+                src={createImageUrlBuilder(value).width(1200).url()}
                 alt={value.alt ?? ''}
                 fill
                 className="object-cover"
