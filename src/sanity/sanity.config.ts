@@ -24,10 +24,12 @@ export default defineConfig({
               .child(
                 S.documentTypeList('post')
                   .title('All Posts')
-                  // FIXED: Added the required "by" wrapper array structure
-                  .defaultOrdering([
-                    { by: [{ field: 'publishedAt', direction: 'desc' }] }
-                  ])
+.defaultOrdering([
+  {
+    field: 'publishedAt',
+    direction: 'desc',
+  },
+])
               ),
             S.divider(),
             S.listItem()

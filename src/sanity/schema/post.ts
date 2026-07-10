@@ -106,9 +106,13 @@ export default defineType({
             }),
           ],
           preview: {
-            select: { title: 'text' },
-            prepare({ title }: { title: string }) {
-              return { title: `❝ ${title?.slice(0, 60)}…` }
+            select: {
+              title: 'text',
+            },
+            prepare(selection: { title?: string }) {
+              return {
+                title: `❝ ${selection.title?.slice(0, 60) ?? ''}`,
+              }
             },
           },
         },
@@ -215,33 +219,29 @@ export default defineType({
       featured: 'featured',
       publishedAt: 'publishedAt',
     },
-    prepare({
-      title,
-      author,
-      category,
-      media,
-      featured,
-      publishedAt,
-    }: {
-      title: string
-      author: string
-      category: string
-      media: unknown
-      featured: boolean
-      publishedAt: string
-    }) {
-      const date = publishedAt
-        ? new Date(publishedAt).toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-          })
-        : 'No date'
-      return {
-        title: `${featured ? '⭐ ' : ''}${title}`,
-        subtitle: `${category ?? 'No category'} · ${author ?? 'No author'} · ${date}`,
-        media,
-      }
-    },
+prepare(selection) {
+  const {
+    title,
+    author,
+    category,
+    media,
+    featured,
+    publishedAt,
+  } = selection
+
+  const date = publishedAt
+    ? new Date(publishedAt).toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      })
+    : 'No date'
+
+  return {
+    title: `${featured ? '⭐ ' : ''}${title}`,
+    subtitle: `${category ?? 'No category'} · ${author ?? 'No author'} · ${date}`,
+    media,
+  }
+}
   },
 })
