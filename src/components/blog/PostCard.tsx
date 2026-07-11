@@ -224,73 +224,71 @@
         )
     }
 
-// Default card
+    // Default card
     return (
         <Link
         href={href}
-        className="group flex flex-col justify-between no-underline transition-colors duration-300 hover:bg-[rgba(242,240,235,0.02)]"
+        className="group block no-underline transition-colors duration-300 hover:bg-[rgba(242,240,235,0.02)]"
         style={{
             borderRight: '1px solid rgba(242,240,235,0.08)',
             color: 'inherit',
         }}
+        
         >
-        <div>
-            <CardImage post={post} />
+        <CardImage post={post} />
 
-            {/* Changed to responsive padding p-6 md:p-8 */}
-            <div className="p-6 md:p-8">
+        <div className="p-7">
             <div className="flex items-center gap-3 mb-4">
-                <PostTag categorySlug={post.category.slug} />
-                <time
+            <PostTag categorySlug={post.category.slug} />
+            <time
                 dateTime={post.publishedAt}
                 className="text-[10px]"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)', letterSpacing: '0.1em' }}
-                >
+            >
                 {date}
-                </time>
+            </time>
             </div>
 
             <h3
-                className="text-[18px] md:text-[20px] font-bold leading-[1.25] mb-3 transition-colors duration-200 group-hover:text-[#C8FF00]"
-                style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.02em' }}
+            className="text-[18px] font-bold leading-[1.2] mb-3 transition-colors duration-200 group-hover:text-[#C8FF00]"
+            style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.02em' }}
             >
-                {post.title}
+            {post.title}
             </h3>
 
             <p
-                className="text-[12px] leading-[1.8] text-[rgba(242,240,235,0.55)]"
-                style={{
+            className="text-[11px] leading-[1.8] mb-5"
+            style={{
                 fontFamily: 'var(--font-mono)',
+                color: 'rgba(242,240,235,0.5)',
                 display: '-webkit-box',
                 WebkitLineClamp: 3,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                } as React.CSSProperties}
+            } as React.CSSProperties}
             >
-                {post.excerpt}
+            {post.excerpt}
             </p>
-            </div>
-        </div>
 
-        {/* Added px-6 md:px-8, pb-6 md:pb-8, and mt-auto to anchor this to the bottom! */}
-        <div
-            className="flex items-center justify-between pt-4 mx-6 md:mx-8 pb-6 md:pb-8 mt-auto"
+            <div
+            className="flex items-center justify-between pt-4"
             style={{ borderTop: '1px solid rgba(242,240,235,0.08)' }}
-        >
-            <span
-            className="text-[10px]"
-            style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)', letterSpacing: '0.05em' }}
             >
-            {post.author?.name || 'Stra Team'}
-            </span>
-            {post.readTime && (
             <span
                 className="text-[10px]"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)', letterSpacing: '0.05em' }}
             >
-                {post.readTime}
+                {post.author.name}
             </span>
+            {post.readTime && (
+                <span
+                className="text-[10px]"
+                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)', letterSpacing: '0.05em' }}
+                >
+                {post.readTime}
+                </span>
             )}
+            </div>
         </div>
         </Link>
     )
