@@ -1,20 +1,8 @@
-import type { SanityImageSource } from '@sanity/image-url'
-
 import { createClient } from 'next-sanity'
 import { createImageUrlBuilder } from '@sanity/image-url'
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: '2025-01-01',
-  useCdn: true,
-})
 
-const builder = createImageUrlBuilder(client)
 
-export function urlFor(source: any) {
-  return builder.image(source)
-}
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -42,6 +30,11 @@ export const serverClient = createClient({
   token: process.env.SANITY_API_READ_TOKEN,
 })
 
+const builder = createImageUrlBuilder(sanityClient)
+
+export function urlFor(source: any) {
+  return builder.image(source)
+}
 
 // Type-safe fetch wrapper with built-in error handling
 export async function sanityFetch<T>({
@@ -51,7 +44,7 @@ export async function sanityFetch<T>({
   fallback,
 }: {
   query: string
-  params?: QueryParams
+  params?: Record<string, unknown>
   revalidate?: number
   fallback: T
 }): Promise<T> {
