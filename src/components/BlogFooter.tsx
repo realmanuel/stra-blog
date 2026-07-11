@@ -27,7 +27,7 @@
 
         {/* Main grid */}
         <div
-            className="px-6 md:px-12 py-12 md:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16"
+            className="px-6 md:px-12 lg:px-16 py-16 md:py-24 lg:py-28 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16"
             style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
         >
             {/* Brand */}
@@ -127,7 +127,7 @@
         </ div>
 
         {/* Bottom bar */}
-        <div className="px-6 md:px-12 py-6 flex flex-col md:flex-row items-center md:justify-between gap-4 text-center md:text-left">
+        <div className="px-6 md:px-12 lg:px-16 py-8 flex flex-col md:flex-row items-center md:justify-between gap-6 text-center md:text-left">
             <p
             className="text-[10px] uppercase tracking-[0.08em]"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}

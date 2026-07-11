@@ -1,51 +1,44 @@
 import { createClient } from 'next-sanity'
 import { createImageUrlBuilder } from '@sanity/image-url'
 
-// export const client = createClient({
-//   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-//   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-//   apiVersion: '2025-01-01',
-//   useCdn: true,
-// })
-
-
-
-
-
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 
+if (!projectId) {
+  throw new Error('Missing NEXT_PUBLIC_SANITY_PROJECT_ID')
+}
 
-if (!projectId) throw new Error('Missing NEXT_PUBLIC_SANITY_PROJECT_ID')
-if (!dataset) throw new Error('Missing NEXT_PUBLIC_SANITY_DATASET')
+if (!dataset) {
+  throw new Error('Missing NEXT_PUBLIC_SANITY_DATASET')
+}
 
-// Public CDN client — used for non-sensitive reads in components
+// Public client (used in components)
 export const sanityClient = createClient({
   projectId,
   dataset,
-  apiVersion: '2024-01-01',
+  apiVersion: '2025-01-01',
   useCdn: true,
   perspective: 'published',
 })
 
-
-// Server client — used for page data fetches, bypasses CDN for freshness
+// Server client (used in page fetching)
 export const serverClient = createClient({
   projectId,
   dataset,
-  apiVersion: '2024-01-01',
+  apiVersion: '2025-01-01',
   useCdn: false,
   perspective: 'published',
   token: process.env.SANITY_API_READ_TOKEN,
 })
 
+// Image URL builder
 const builder = createImageUrlBuilder(sanityClient)
 
-export function urlFor(source: any) {
+export function urlFor(source: unknown) {
   return builder.image(source)
 }
 
-// Type-safe fetch wrapper with built-in error handling
+// Typed fetch helper
 export async function sanityFetch<T>({
   query,
   params = {},
@@ -57,25 +50,14 @@ export async function sanityFetch<T>({
   revalidate?: number
   fallback: T
 }): Promise<T> {
-  // Guard — never throw in production, always return fallback
-  if (!projectId || !dataset) {
-    console.warn('[sanity] Missing env vars — returning fallback')
-    return fallback
-  }
-
   try {
     const result = await serverClient.fetch<T>(query, params, {
       next: { revalidate },
     })
 
-    // GROQ returns null for [0] queries when nothing matches
-    if (result === null || result === undefined) {
-      return fallback
-    }
-
-    return result
-  } catch (err) {
-    console.error('[sanity] fetch failed:', err)
+    return result ?? fallback
+  } catch (error) {
+    console.error('[Sanity]', error)
     return fallback
   }
 }

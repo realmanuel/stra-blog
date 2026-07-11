@@ -74,12 +74,8 @@
 
           {/* ── Journal header ── */}
           <header
-            className="px-6 md:px-12 flex flex-col md:flex-row md:items-end md:justify-between gap-10"
-            style={{
-              paddingTop: '140px',
-              paddingBottom: '48px',
-              borderBottom: '1px solid rgba(242,240,235,0.08)',
-            }}
+            className="px-6 md:px-12 lg:px-16 pt-[120px] md:pt-[160px] lg:pt-[180px] pb-14 md:pb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-10"
+            style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
           >
             <div>
               <div
@@ -241,13 +237,13 @@
 
   // ── Shared sub-components ──
 
-  function SectionLabel({ label }: { label: string }) {
-    return (
-      <div
-        className="px-6 md:px-12 py-5 flex items-center gap-4"
-        style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
-        aria-hidden="true"
-      >
+    function SectionLabel({ label }: { label: string }) {
+      return (
+        <div
+          className="px-6 md:px-12 lg:px-16 py-7 md:py-9 flex items-center gap-6"
+          style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
+          aria-hidden="true"
+        >
         <span
           className="text-[10px] uppercase tracking-[0.2em] flex-shrink-0"
           style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
