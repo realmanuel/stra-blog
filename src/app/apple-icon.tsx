@@ -25,7 +25,7 @@
                 letterSpacing: '-4px',
             }}
             >
-            J
+            B
             </div>
         </div>
         ),
