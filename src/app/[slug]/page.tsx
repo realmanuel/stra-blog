@@ -25,9 +25,7 @@ const BASE_URL = 'https://blog.gestra.ng'
 export async function generateStaticParams() {
   try {
     const slugs = await getAllPostSlugs()
-    return slugs
-      .filter((s) => Boolean(s?.slug))
-      .map((s) => ({ slug: s.slug }))
+    return slugs.filter((s) => Boolean(s?.slug)).map((s) => ({ slug: s.slug }))
   } catch {
     return []
   }
@@ -48,10 +46,9 @@ export async function generateMetadata({
     }
   }
 
-  const ogImage =
-    post.coverImage?.asset
-      ? urlFor(post.coverImage).width(1200).height(630).url()
-      : `${BASE_URL}/og-image.png`
+  const ogImage = post.coverImage?.asset
+    ? urlFor(post.coverImage).width(1200).height(630).url()
+    : `${BASE_URL}/og-image.png`
 
   return {
     title: post.title,
@@ -66,14 +63,7 @@ export async function generateMetadata({
       modifiedTime: post._updatedAt,
       authors: [post.author.name],
       tags: [post.category.title],
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: post.coverImage?.alt ?? post.title,
-        },
-      ],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.coverImage?.alt ?? post.title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -90,17 +80,14 @@ export default async function PostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
-  // Parallel fetch — related posts + fallback pool
   const [related, allPosts] = await Promise.all([
     getRelatedPosts(post.slug, post.category.slug),
     getAllPosts(),
   ])
 
-  // Fill sidebar up to 3 without duplicates
   const usedSlugs = new Set([post.slug, ...related.map((r) => r.slug)])
   const fillPosts = allPosts
     .filter((p) => !usedSlugs.has(p.slug))
@@ -119,17 +106,18 @@ export default async function PostPage({
         {/* ── Breadcrumb ── */}
         <nav
           aria-label="Breadcrumb"
-          className="px-6 md:px-12 flex items-center gap-3 flex-wrap"
+          className="px-6 md:px-16 flex items-center gap-3 flex-wrap"
           style={{
-            paddingTop: '88px',
-            paddingBottom: '16px',
+            paddingTop: '84px',
+            paddingBottom: '18px',
             borderBottom: '1px solid rgba(242,240,235,0.08)',
           }}
         >
           <Link
             href="/"
-            className="text-[10px] uppercase tracking-[0.15em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.35)] hover:text-[#C8FF00]"
-            style={{ fontFamily: 'var(--font-mono)' }}
+            className="text-[10px] uppercase tracking-[0.14em] no-underline transition-colors duration-200 hover:tracking-[0.18em] hover:text-[#d4ff1a]"
+            style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
+
           >
             ← Stra Journal
           </Link>
@@ -144,11 +132,15 @@ export default async function PostPage({
 
         {/* ── Post hero ── */}
         <header
-          className="px-6 md:px-12 py-14 md:py-20"
-          style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
+          className="px-6 md:px-16"
+          style={{
+            paddingTop: '64px',
+            paddingBottom: '56px',
+            borderBottom: '1px solid rgba(242,240,235,0.08)',
+          }}
         >
-          {/* Meta row */}
-          <div className="flex items-center gap-4 mb-8 flex-wrap">
+          {/* Meta */}
+          <div className="flex items-center gap-4 mb-7 flex-wrap">
             <PostTag categorySlug={post.category.slug} />
             <time
               dateTime={post.publishedAt}
@@ -169,12 +161,13 @@ export default async function PostPage({
 
           {/* Title */}
           <h1
-            className="font-extrabold leading-[0.95] mb-8"
+            className="font-extrabold mb-7"
             style={{
               fontFamily: 'var(--font-syne)',
-              fontSize: 'clamp(32px, 5vw, 72px)',
+              fontSize: 'clamp(30px, 4.8vw, 68px)',
               letterSpacing: '-0.04em',
-              maxWidth: '900px',
+              lineHeight: '0.97',
+              maxWidth: '860px',
             }}
           >
             {post.title}
@@ -182,40 +175,39 @@ export default async function PostPage({
 
           {/* Excerpt */}
           <p
-            className="text-[14px] leading-[1.9] mb-12"
+            className="text-[13px] leading-[1.95] mb-10"
             style={{
               fontFamily: 'var(--font-mono)',
-              color: 'rgba(242,240,235,0.5)',
-              maxWidth: '600px',
+              color: 'rgba(242,240,235,0.48)',
+              maxWidth: '580px',
             }}
           >
             {post.excerpt}
           </p>
 
-          {/* Author + date */}
+          {/* Author row */}
           <div
-            className="flex items-center justify-between pt-8 flex-wrap gap-6"
+            className="flex items-center justify-between pt-7 flex-wrap gap-5"
             style={{ borderTop: '1px solid rgba(242,240,235,0.08)' }}
           >
             <div className="flex items-center gap-3">
               <div
-                className="w-10 h-10 flex items-center justify-center flex-shrink-0 overflow-hidden"
+                className="w-9 h-9 flex items-center justify-center flex-shrink-0 overflow-hidden"
                 style={{
-                  background: 'rgba(200,255,0,0.08)',
-                  border: '1px solid rgba(200,255,0,0.2)',
+                  background: 'rgba(200,255,0,0.07)',
+                  border: '1px solid rgba(200,255,0,0.18)',
                 }}
-                aria-hidden="true"
               >
                 {post.author.avatar?.asset ? (
                   <Image
-                    src={urlFor(post.author.avatar).width(80).height(80).url()}
+                    src={urlFor(post.author.avatar).width(72).height(72).url()}
                     alt={post.author.name}
-                    width={40}
-                    height={40}
+                    width={36}
+                    height={36}
                     className="object-cover w-full h-full"
                   />
                 ) : (
-                  <span className="text-sm">✍️</span>
+                  <span className="text-sm" aria-hidden="true">✍️</span>
                 )}
               </div>
               <div>
@@ -228,7 +220,7 @@ export default async function PostPage({
                 {post.author.role && (
                   <div
                     className="text-[10px]"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
+                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.32)' }}
                   >
                     {post.author.role}
                   </div>
@@ -239,7 +231,7 @@ export default async function PostPage({
             <time
               dateTime={post.publishedAt}
               className="text-[10px] uppercase tracking-[0.1em]"
-              style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
+              style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
             >
               {formattedDate}
             </time>
@@ -268,15 +260,15 @@ export default async function PostPage({
               className="w-full h-full relative"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(200,255,0,0.06) 0%, transparent 50%), linear-gradient(to bottom, #1A1A22, #030305)',
+                  'linear-gradient(135deg, rgba(200,255,0,0.05) 0%, transparent 50%), linear-gradient(to bottom, #1A1A22, #030305)',
               }}
             >
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   backgroundImage: `
-                    linear-gradient(rgba(242,240,235,0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(242,240,235,0.03) 1px, transparent 1px)
+                    linear-gradient(rgba(242,240,235,0.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(242,240,235,0.025) 1px, transparent 1px)
                   `,
                   backgroundSize: '80px 80px',
                 }}
@@ -288,20 +280,23 @@ export default async function PostPage({
 
         {/* ── Body + Sidebar ── */}
         <div
-          className="grid grid-cols-1 md:grid-cols-[1fr_300px]"
+          className="grid grid-cols-1 md:grid-cols-[1fr_280px]"
           style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
         >
-          {/* Article body */}
+          {/* Article */}
           <article
-            className="px-6 md:px-12 py-14 md:py-20 min-w-0"
-            style={{ borderRight: '1px solid rgba(242,240,235,0.08)' }}
+            className="min-w-0"
+            style={{
+              padding: 'clamp(40px, 5vw, 80px) clamp(24px, 5vw, 64px)',
+              borderRight: '1px solid rgba(242,240,235,0.08)',
+            }}
           >
             {post.body && post.body.length > 0 ? (
               <PostBody blocks={post.body} />
             ) : (
               <p
                 className="text-[13px]"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
+                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
               >
                 Content coming soon.
               </p>
@@ -310,43 +305,39 @@ export default async function PostPage({
 
           {/* Sidebar */}
           <aside className="hidden md:block">
-            <div className="sticky top-[88px] p-8 flex flex-col gap-10">
+            <div className="sticky top-[84px] flex flex-col gap-8 p-8">
 
               {/* Related posts */}
               {sidebarPosts.length > 0 && (
                 <div>
                   <div
-                    className="text-[10px] uppercase tracking-[0.2em] mb-6 flex items-center gap-3"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
+                    className="text-[10px] uppercase tracking-[0.2em] mb-5 flex items-center gap-3"
+                    style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
                   >
                     <span
-                      style={{ width: '16px', height: '1px', background: 'rgba(242,240,235,0.3)', display: 'block', flexShrink: 0 }}
+                      style={{ width: '14px', height: '1px', background: 'rgba(242,240,235,0.28)', display: 'block', flexShrink: 0 }}
                       aria-hidden="true"
                     />
-                    Related Posts
+                    Related
                   </div>
                   <nav aria-label="Related posts">
                     {sidebarPosts.map((relatedPost, i) => (
                       <Link
                         key={relatedPost._id}
                         href={`/${relatedPost.slug}`}
-                        className="block no-underline pb-5 mb-5 transition-opacity duration-200 hover:opacity-70"
+                        className="block no-underline transition-opacity duration-200 hover:opacity-60"
                         style={{
+                          color: 'inherit',
+                          paddingBottom: i < sidebarPosts.length - 1 ? '20px' : '0',
+                          marginBottom: i < sidebarPosts.length - 1 ? '20px' : '0',
                           borderBottom:
                             i < sidebarPosts.length - 1
-                              ? '1px solid rgba(242,240,235,0.08)'
+                              ? '1px solid rgba(242,240,235,0.06)'
                               : 'none',
-                          color: 'inherit',
                         }}
                       >
-                        <div className="mb-2">
-                          <PostTag
-                            categorySlug={relatedPost.category?.slug ?? 'uncategorised'}
-                            size="sm"
-                          />
-                        </div>
                         <p
-                          className="text-[13px] font-semibold leading-[1.3] mb-2"
+                          className="text-[12px] font-semibold leading-[1.35] mb-[6px]"
                           style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.01em' }}
                         >
                           {relatedPost.title}
@@ -356,8 +347,8 @@ export default async function PostPage({
                           className="text-[10px]"
                           style={{
                             fontFamily: 'var(--font-mono)',
-                            color: 'rgba(242,240,235,0.3)',
-                            letterSpacing: '0.05em',
+                            color: 'rgba(242,240,235,0.28)',
+                            letterSpacing: '0.04em',
                           }}
                         >
                           {formatDate(relatedPost.publishedAt)}
@@ -370,32 +361,32 @@ export default async function PostPage({
               )}
 
               {/* About */}
-              <div style={{ borderTop: '1px solid rgba(242,240,235,0.08)', paddingTop: '32px' }}>
+              <div style={{ borderTop: '1px solid rgba(242,240,235,0.07)', paddingTop: '28px' }}>
                 <div
                   className="text-[10px] uppercase tracking-[0.2em] mb-4 flex items-center gap-3"
-                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
+                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
                 >
                   <span
-                    style={{ width: '16px', height: '1px', background: 'rgba(242,240,235,0.3)', display: 'block', flexShrink: 0 }}
+                    style={{ width: '14px', height: '1px', background: 'rgba(242,240,235,0.28)', display: 'block', flexShrink: 0 }}
                     aria-hidden="true"
                   />
-                  About Stra Journal
+                  About
                 </div>
                 <p
-                  className="text-[11px] leading-[1.8] mb-5"
-                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.4)' }}
+                  className="text-[11px] leading-[1.85] mb-5"
+                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.38)' }}
                 >
-                  The official Stra publication — platform updates, seller stories,
-                  product spotlights, and marketplace insights written by the Stra team.
+                  The official Stra publication, platform updates, seller stories,
+                  product spotlights, and marketplace insights.
                 </p>
                 <a
                   href="https://www.gestra.ng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 text-[rgba(242,240,235,0.35)] hover:text-[#C8FF00]"
-                  style={{ fontFamily: 'var(--font-mono)' }}
+                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 hover:tracking-[0.18em] hover:text-[#d4ff1a]"
+                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.32)' }}
                 >
-                  Visit gestra.ng
+                  gestra.ng
                   <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                     <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -410,19 +401,16 @@ export default async function PostPage({
         {sidebarPosts.length > 0 && (
           <section aria-label="More from Stra Journal">
             <div
-              className="px-6 md:px-12 py-5 flex items-center gap-4"
+              className="px-6 md:px-16 py-[18px] flex items-center gap-5"
               style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
             >
               <span
-                className="text-[10px] uppercase tracking-[0.2em] flex-shrink-0"
-                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.3)' }}
+                className="text-[10px] uppercase tracking-[0.22em] flex-shrink-0"
+                style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
               >
                 More from Stra Journal
               </span>
-              <div
-                style={{ flex: 1, height: '1px', background: 'rgba(242,240,235,0.08)' }}
-                aria-hidden="true"
-              />
+              <div style={{ flex: 1, height: '1px', background: 'rgba(242,240,235,0.06)' }} />
             </div>
             <div
               className="grid grid-cols-1 md:grid-cols-3"
@@ -440,3 +428,4 @@ export default async function PostPage({
     </>
   )
 }
+

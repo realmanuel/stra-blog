@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     locale: 'en_NG',
     url: BASE_URL,
     siteName: 'Stra Blog',
-    title: 'Stra Blog — Stories, Updates & Spotlights',
+    title: 'Stra Blog | Stories, Updates & Spotlights',
     description:
       'The official Stra publication. Platform updates, product spotlights, seller stories and marketplace insights.',
     images: [

@@ -11,6 +11,14 @@
   --font-syne: 'Syne', sans-serif;
   --font-mono: 'DM Mono', monospace;
   --font-serif: 'Instrument Serif', serif;
+
+  /* Spacing scale */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  48px;
+  --space-xl:  80px;
+  --space-2xl: 128px;
 }
 
 *,
@@ -24,6 +32,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  font-size: 16px;
 }
 
 body {
@@ -34,12 +43,15 @@ body {
   cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Slightly looser base line height for editorial feel */
+  line-height: 1.6;
 }
 
-/* ── Focus styles — accessibility ── */
+/* ── Focus — accessibility ── */
 :focus-visible {
   outline: 2px solid #C8FF00;
   outline-offset: 3px;
+  border-radius: 1px;
 }
 
 /* ── Custom cursor ── */
@@ -75,7 +87,7 @@ body {
   will-change: transform;
 }
 
-/* ── Noise overlay — subtle texture ── */
+/* ── Noise overlay ── */
 body::before {
   content: '';
   position: fixed;
@@ -89,8 +101,8 @@ body::before {
 /* ── Scroll reveal ── */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .reveal.visible {
@@ -100,84 +112,68 @@ body::before {
 
 /* ── Entry animations ── */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-fadeUp-1 { animation: fadeUp 0.7s ease 0.1s both; }
-.animate-fadeUp-2 { animation: fadeUp 0.7s ease 0.25s both; }
-.animate-fadeUp-3 { animation: fadeUp 0.7s ease 0.4s both; }
-.animate-fadeUp-4 { animation: fadeUp 0.7s ease 0.55s both; }
+.animate-fadeUp-1 { animation: fadeUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.05s both; }
+.animate-fadeUp-2 { animation: fadeUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.18s both; }
+.animate-fadeUp-3 { animation: fadeUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.32s both; }
+.animate-fadeUp-4 { animation: fadeUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) 0.46s both; }
 
-/* ── Scrollbar — subtle ── */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar        { width: 3px; height: 3px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(242, 240, 235, 0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(242, 240, 235, 0.2); }
 
-::-webkit-scrollbar-track {
-  background: #030305;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(242, 240, 235, 0.12);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(242, 240, 235, 0.2);
-}
-
-/* ── Hide scrollbar on category bar ── */
+/* ── Hide scrollbar utility ── */
 .scrollbar-none {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
+.scrollbar-none::-webkit-scrollbar { display: none; }
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(200, 255, 0, 0.25);
+  background: rgba(200, 255, 0, 0.2);
   color: #F2F0EB;
 }
 
-/* ── Mobile — restore default cursor, hide custom ── */
+/* ── Card hover accent line ── */
+.card-hover-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: #C8FF00;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.group:hover .card-hover-line {
+  transform: scaleX(1);
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 1px;
+  background: rgba(242, 240, 235, 0.08);
+}
+
+/* ── Mobile ── */
 @media (hover: none) {
-  .cursor,
-  .cursor-ring {
-    display: none;
-  }
-
-  body {
-    cursor: auto;
-  }
-
-  a,
-  button {
-    cursor: pointer;
-  }
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
+  .reveal { opacity: 1; transform: none; }
 }
