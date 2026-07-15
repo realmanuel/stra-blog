@@ -6,8 +6,8 @@ import Link from 'next/link'
 const NAV_LINKS = [
   { label: 'Updates', href: '/?category=updates' },
   { label: 'Spotlights', href: '/?category=spotlights' },
-  { label: 'Seller Stories', href: '/?category=seller-story' },
-  { label: 'Platform Tips', href: '/?category=tips' },
+  { label: 'Seller Stories', href: '/?category=seller-stories' },
+  { label: 'Platform Tips', href: '/?category=platform-tips' },
   { label: 'Industry', href: '/?category=industry' },
 ]
 
