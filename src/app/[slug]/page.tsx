@@ -336,6 +336,12 @@ export default async function PostPage({
                               : 'none',
                         }}
                       >
+                        <div className="mb-[6px]">
+                          <PostTag
+                            categorySlug={relatedPost.category?.slug ?? 'uncategorised'}
+                            size="sm"
+                          />
+                        </div>
                         <p
                           className="text-[12px] font-semibold leading-[1.35] mb-[6px]"
                           style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.01em' }}
@@ -376,7 +382,7 @@ export default async function PostPage({
                   className="text-[11px] leading-[1.85] mb-5"
                   style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.38)' }}
                 >
-                  The official Stra publication, platform updates, seller stories,
+                  The official Stra publication — platform updates, seller stories,
                   product spotlights, and marketplace insights.
                 </p>
                 <a
@@ -429,3 +435,4 @@ export default async function PostPage({
   )
 }
 
+UNCATEGORISED
