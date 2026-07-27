@@ -181,7 +181,7 @@ export default function BlogNavbar() {
           visibility: menuOpen ? 'visible' : 'hidden',
         }}
       >
-        {/* Drawer header */}
+        {/* Drawer header
         <div
           className="flex items-center justify-between px-7 h-20 flex-shrink-0"
           style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
@@ -208,7 +208,7 @@ export default function BlogNavbar() {
             >
               Journal
             </span>
-          </Link>
+          </Link> */}
 
           <button
             aria-label="Close menu"
