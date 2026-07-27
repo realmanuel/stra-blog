@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const { category } = await searchParams
   if (!category || category === 'all') return {}
   const label = category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')
-  return { title: `${label} — Stra Journal` }
+  return { title: `${label} | Stra Journal` }
 }
 
 export default async function BlogIndexPage({ searchParams }: PageProps) {
