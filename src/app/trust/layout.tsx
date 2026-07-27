@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     description: 'How Stra protects buyers and sellers on Nigeria\'s smartest secondhand marketplace.',
     url: `${BASE_URL}/trust`,
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Stra Trust & Safety' }],
-  },
+  }
 }
 
 export default function TrustLayout({ children }: { children: React.ReactNode }) {
