@@ -181,34 +181,7 @@ export default function BlogNavbar() {
           visibility: menuOpen ? 'visible' : 'hidden',
         }}
       >
-        {/* Drawer header
-        <div
-          className="flex items-center justify-between px-7 h-20 flex-shrink-0"
-          style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
-        >
-          <Link
-            href="/"
-            onClick={close}
-            className="flex items-center gap-3 no-underline"
-            aria-label="Ark Journal home"
-          >
-            <span
-              className="text-[20px] font-extrabold tracking-tight"
-              style={{ fontFamily: 'var(--font-syne)', color: '#F2F0EB', letterSpacing: '-0.02em' }}
-            >
-              STR<span style={{ color: '#C8FF00' }}>A</span>
-            </span>
-            <span
-              style={{ width: '1px', height: '14px', background: 'rgba(242,240,235,0.2)', display: 'block' }}
-              aria-hidden="true"
-            />
-            <span
-              className="text-[10px] uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.5)' }}
-            >
-              Journal
-            </span>
-          </Link> */}
+
 
           <button
             aria-label="Close menu"
