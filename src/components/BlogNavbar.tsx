@@ -182,7 +182,7 @@ export default function BlogNavbar() {
         }}
       >
 
-
+        <div className="flex justify-end px-7 py-6">
           <button
             aria-label="Close menu"
             onClick={close}
