@@ -20,7 +20,7 @@ import { formatDate } from '@/lib/posts'
 export const revalidate = 60
 export const dynamicParams = true
 
-const BASE_URL = 'https://blog.gestra.ng'
+const BASE_URL = 'https://blog.geArk.ng'
 
 export async function generateStaticParams() {
   try {
@@ -119,7 +119,7 @@ export default async function PostPage({
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
 
           >
-            ← Stra Journal
+            ← Ark Journal
           </Link>
           <span
             style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(242,240,235,0.2)' }}
@@ -382,17 +382,17 @@ export default async function PostPage({
                   className="text-[11px] leading-[1.85] mb-5"
                   style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.38)' }}
                 >
-                  The official Stra publication — platform updates, seller stories,
+                  The official Ark publication — platform updates, seller stories,
                   product spotlights, and marketplace insights.
                 </p>
                 <a
-                  href="https://www.gestra.ng"
+                  href="https://www.geArk.ng"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 hover:tracking-[0.18em] hover:text-[#d4ff1a]"
                   style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.32)' }}
                 >
-                  gestra.ng
+                  geArk.ng
                   <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                     <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -405,7 +405,7 @@ export default async function PostPage({
 
         {/* ── More from Journal ── */}
         {sidebarPosts.length > 0 && (
-          <section aria-label="More from Stra Journal">
+          <section aria-label="More from Ark Journal">
             <div
               className="px-6 md:px-16 py-[18px] flex items-center gap-5"
               style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
@@ -414,7 +414,7 @@ export default async function PostPage({
                 className="text-[10px] uppercase tracking-[0.22em] flex-shrink-0"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
               >
-                More from Stra Journal
+                More from Ark Journal
               </span>
               <div style={{ flex: 1, height: '1px', background: 'rgba(242,240,235,0.06)' }} />
             </div>

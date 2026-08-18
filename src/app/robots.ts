@@ -1,6 +1,6 @@
     import type { MetadataRoute } from 'next'
 
-    const BASE_URL = 'https://blog.gestra.ng'
+    const BASE_URL = 'https://blog.geArk.ng'
 
     export default function robots(): MetadataRoute.Robots {
     return {

@@ -74,7 +74,7 @@
                 color: 'rgba(242,240,235,0.4)',
             }}
             >
-            Stra
+            Ark
             </em>{' '}
             works for everyone
         </h2>

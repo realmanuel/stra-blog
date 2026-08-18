@@ -6,8 +6,8 @@
     }
 
     export default function PostJsonLd({ post }: PostJsonLdProps) {
-    const BASE_URL = 'https://blog.gestra.ng'
-    const MAIN_URL = 'https://www.gestra.ng'
+    const BASE_URL = 'https://blog.geArk.ng'
+    const MAIN_URL = 'https://www.geArk.ng'
 
     const formattedDate = new Date(post.publishedAt).toISOString()
 
@@ -29,7 +29,7 @@
         publisher: {
         '@type': 'Organization',
         '@id': `${MAIN_URL}/#organization`,
-        name: 'Stra',
+        name: 'Ark',
         url: MAIN_URL,
         logo: {
             '@type': 'ImageObject',
@@ -41,7 +41,7 @@
         isPartOf: {
         '@type': 'Blog',
         '@id': `${BASE_URL}/#blog`,
-        name: 'Stra Journal',
+        name: 'Ark Journal',
         url: BASE_URL,
         },
         mainEntityOfPage: {
@@ -62,7 +62,7 @@
         articleSection: post.category.title,
         keywords: [
         post.category.title,
-        'Stra',
+        'Ark',
         'Nigeria marketplace',
         'secondhand Nigeria',
         ].join(', '),

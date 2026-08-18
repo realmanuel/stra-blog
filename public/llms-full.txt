@@ -1,14 +1,14 @@
-# Stra — Full Content Reference for AI Systems
-# https://www.gestra.ng
+# Ark — Full Content Reference for AI Systems
+# https://www.geArk.ng
 # Last updated: 2026
 
 ---
 
 ## Platform overview
 
-Stra is a Nigerian secondhand and approved-product marketplace. It is designed to solve the core trust problem in peer-to-peer commerce: buyers not receiving what they paid for, sellers not being paid fairly, and both sides operating with no protection.
+Ark is a Nigerian secondhand and approved-product marketplace. It is designed to solve the core trust problem in peer-to-peer commerce: buyers not receiving what they paid for, sellers not being paid fairly, and both sides operating with no protection.
 
-Stra introduces a structured transaction layer that sits between buyers and sellers. This layer includes:
+Ark introduces a structured transaction layer that sits between buyers and sellers. This layer includes:
 - Listing review and video verification before a listing goes live
 - Escrow-protected payment processing
 - Platform-managed rider delivery
@@ -17,26 +17,26 @@ Stra introduces a structured transaction layer that sits between buyers and sell
 
 ---
 
-## How buying works on Stra
+## How buying works on Ark
 
 1. Buyer browses verified listings across categories including fashion, electronics, furniture, appliances, gadgets, and more.
-2. Buyer places an order and pays through Stra's approved payment infrastructure.
+2. Buyer places an order and pays through Ark's approved payment infrastructure.
 3. Payment is held in escrow — it does not go to the seller upfront.
-4. Seller confirms the item is ready. Stra's rider collects from the seller.
+4. Seller confirms the item is ready. Ark's rider collects from the seller.
 5. Rider delivers to the buyer.
 6. Buyer has 12 hours to raise a dispute if the item does not match the listing.
 7. If no valid dispute is raised, the order completes and the seller receives payout.
 
 ---
 
-## How selling works on Stra
+## How selling works on Ark
 
 1. Seller creates a listing with accurate photos, pricing, and item description.
 2. For eligible listings (especially pre-loved or peer-to-peer items), seller records a 20–30 second verification video.
-3. Stra's team reviews the listing for accuracy, consistency, and compliance.
+3. Ark's team reviews the listing for accuracy, consistency, and compliance.
 4. Listing goes live once approved.
-5. When a buyer places an order, Stra notifies the seller.
-6. Seller confirms item readiness. Stra's rider collects.
+5. When a buyer places an order, Ark notifies the seller.
+6. Seller confirms item readiness. Ark's rider collects.
 7. Seller receives payout within 24 hours of confirmed rider handoff — minus 10% platform commission.
 
 ---
@@ -54,7 +54,7 @@ Stra introduces a structured transaction layer that sits between buyers and sell
 
 Sellers subscribe to push their listings to buyers. Plans are per month:
 - Basic Plan: ₦3,000/month — listings pushed to 1,500 buyers, standard placement.
-- Premium Plan: ₦10,000/month — listings pushed to 3,500 buyers, featured placement, social media features on Stra pages, priority listing review.
+- Premium Plan: ₦10,000/month — listings pushed to 3,500 buyers, featured placement, social media features on Ark pages, priority listing review.
 
 Promotions are per product — a seller can promote one listing while leaving others on a standard plan.
 
@@ -62,16 +62,16 @@ Promotions are per product — a seller can promote one listing while leaving ot
 
 ## Trust and safety systems
 
-- Video verification: sellers record short verification videos reviewed by Stra's team before listing approval.
-- AI-assisted moderation: Stra uses automated tools and human review to assess listing quality, detect fraud, and flag inconsistencies.
+- Video verification: sellers record short verification videos reviewed by Ark's team before listing approval.
+- AI-assisted moderation: Ark uses automated tools and human review to assess listing quality, detect fraud, and flag inconsistencies.
 - Escrow payments: buyer funds are held until delivery is confirmed.
 - Contact restrictions: buyer and seller personal contact details may be masked or restricted to prevent off-platform transactions.
-- Dispute resolution: Stra reviews evidence including listing content, delivery records, and dispute statements to determine outcomes.
-- Seller protection: Stra reviews claims before taking action to protect legitimate sellers from false complaints or abusive refund requests.
+- Dispute resolution: Ark reviews evidence including listing content, delivery records, and dispute statements to determine outcomes.
+- Seller protection: Ark reviews claims before taking action to protect legitimate sellers from false complaints or abusive refund requests.
 
 ---
 
-## Categories available on Stra
+## Categories available on Ark
 
 - Phones & Gadgets (smartphones, tablets, accessories)
 - Fashion (clothes, shoes, bags, accessories)
@@ -86,13 +86,13 @@ Promotions are per product — a seller can promote one listing while leaving ot
 
 ## Business information
 
-- Organisation: Stra
-- Primary domain: https://www.gestra.ng
-- Blog: https://blog.gestra.ng
-- Support: support@strawise.co
-- Partnerships: partner@strawise.co
-- Seller support: inquire@strawise.co
-- Privacy: privacy@strawise.co
+- Organisation: Ark
+- Primary domain: https://www.geArk.ng
+- Blog: https://blog.geArk.ng
+- Support: support@Arkwise.co
+- Partnerships: partner@Arkwise.co
+- Seller support: inquire@Arkwise.co
+- Privacy: privacy@Arkwise.co
 - Business address (Abuja): Plot 104 Emmanuel Adiele Street, off Mike Akhigbe Way, Jabi, Abuja
 - Business address (Lagos): Mulliner Towers, Ikoyi, Lagos 106104
 - Office address (Dubai): Living, Marina Gate, D94 M Floor, Jumeirah, Dubai Marina, Dubai, UAE

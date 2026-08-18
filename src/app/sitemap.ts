@@ -1,7 +1,7 @@
     import type { MetadataRoute } from 'next'
     import { getAllPostSlugs } from '@/sanity/queries'
 
-    const BASE_URL = 'https://blog.gestra.ng'
+    const BASE_URL = 'https://blog.geArk.ng'
 
     export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const slugs = await getAllPostSlugs()

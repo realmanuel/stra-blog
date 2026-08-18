@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const { category } = await searchParams
   if (!category || category === 'all') return {}
   const label = category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')
-  return { title: `${label} | Stra Journal` }
+  return { title: `${label} | Ark Journal` }
 }
 
 export default async function BlogIndexPage({ searchParams }: PageProps) {
@@ -74,7 +74,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 style={{ width: '28px', height: '1px', background: '#C8FF00', display: 'block', flexShrink: 0 }}
                 aria-hidden="true"
               />
-              Stra Journal
+              Ark Journal
             </div>
             <h1
               className="animate-fadeUp-2 font-extrabold"
@@ -106,7 +106,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
               className="text-[12px] leading-[1.95] mb-6"
               style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.45)' }}
             >
-              The official Stra publication. Platform updates, product spotlights,
+              The official Ark publication. Platform updates, product spotlights,
               seller features, marketplace insights, and everything happening inside
               Nigeria&apos;s smartest secondhand market.
             </p>

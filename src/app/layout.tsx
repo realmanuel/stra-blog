@@ -25,32 +25,32 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 })
 
-const BASE_URL = 'https://blog.gestra.ng'
+const BASE_URL = 'https://blog.geArk.ng'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
-  title: {
-    default: 'Stra Blog | Stories, Updates & Spotlights',
-    template: '%s | Stra Blog',
+    title: {
+    default: 'Ark Blog | Stories, Updates & Spotlights',
+    template: '%s | Ark Blog',
   },
 
   description:
-    'The official Stra publication. Platform updates, product spotlights, seller stories, marketplace insights, and everything happening inside Nigeria\'s smartest secondhand market.',
+    'The official Ark publication. Platform updates, product spotlights, seller stories, marketplace insights, and everything happening inside Nigeria\'s smartest secondhand market.',
 
   keywords: [
-    'Stra blog',
-    'Stra Journal',
+    'Ark blog',
+    'Ark Journal',
     'Nigeria marketplace news',
     'secondhand market Nigeria',
     'seller stories Nigeria',
-    'Stra updates',
+    'Ark updates',
     'buy sell Nigeria tips',
   ],
 
-  authors: [{ name: 'Stra Blog', url: BASE_URL }],
-  creator: 'Stra',
-  publisher: 'Stra',
+  authors: [{ name: 'Ark Blog', url: BASE_URL }],
+  creator: 'Ark',
+  publisher: 'Ark',
 
   robots: {
     index: true,
@@ -72,16 +72,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_NG',
     url: BASE_URL,
-    siteName: 'Stra Blog',
-    title: 'Stra Blog | Stories, Updates & Spotlights',
+    siteName: 'Ark Blog',
+    title: 'Ark Blog | Stories, Updates & Spotlights',
     description:
-      'The official Stra publication. Platform updates, product spotlights, seller stories and marketplace insights.',
+      'The official Ark publication. Platform updates, product spotlights, seller stories and marketplace insights.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Stra Blog',
+        alt: 'Ark Blog',
         type: 'image/png',
       },
     ],
@@ -89,11 +89,11 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    site: '@stramarketng',
-    creator: '@stramarketng',
-    title: 'Stra Blog | Stories, Updates & Spotlights',
+    site: '@Arkmarketng',
+    creator: '@Arkmarketng',
+    title: 'Ark Blog | Stories, Updates & Spotlights',
     description:
-      'The official Stra publication. Platform updates, product spotlights, seller stories and marketplace insights.',
+      'The official Ark publication. Platform updates, product spotlights, seller stories and marketplace insights.',
     images: ['/og-image.png'],
   },
 }

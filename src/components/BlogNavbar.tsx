@@ -54,13 +54,13 @@ export default function BlogNavbar() {
         <Link
           href="/"
           className="flex items-center gap-3 no-underline flex-shrink-0"
-          aria-label="Stra Journal home"
+          aria-label="Ark Journal home"
         >
-          <span
+            <span
             className="text-[22px] font-extrabold tracking-tight"
             style={{ fontFamily: 'var(--font-syne)', color: '#F2F0EB', letterSpacing: '-0.02em' }}
           >
-            STR<span style={{ color: '#C8FF00' }}>A</span>
+            AR<span style={{ color: '#C8FF00' }}>K</span>
           </span>
           <span
             style={{ width: '1px', height: '16px', background: 'rgba(242,240,235,0.2)', display: 'block', flexShrink: 0 }}
@@ -97,7 +97,7 @@ export default function BlogNavbar() {
         {/* Desktop right */}
         <div className="hidden md:flex items-center gap-5 flex-shrink-0">
           <a
-            href="https://www.gestra.ng"
+            href="https://www.geArk.ng"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
@@ -105,7 +105,7 @@ export default function BlogNavbar() {
             onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.5)')}
           >
-            gestra.ng
+            geArk.ng
             <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
               <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -190,7 +190,7 @@ export default function BlogNavbar() {
             href="/"
             onClick={close}
             className="flex items-center gap-3 no-underline"
-            aria-label="Stra Journal home"
+            aria-label="Ark Journal home"
           >
             <span
               className="text-[20px] font-extrabold tracking-tight"
@@ -279,7 +279,7 @@ export default function BlogNavbar() {
           }}
         >
           <a
-            href="https://www.gestra.ng"
+            href="https://www.geArk.ng"
             target="_blank"
             rel="noopener noreferrer"
             onClick={close}
@@ -294,7 +294,7 @@ export default function BlogNavbar() {
               e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
-            Visit gestra.ng
+            Visit geArk.ng
             <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
               <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -303,7 +303,7 @@ export default function BlogNavbar() {
             className="text-center text-[10px] uppercase tracking-[0.1em] mt-1"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
           >
-            © {new Date().getFullYear()} Stra Journal
+            © {new Date().getFullYear()} Ark Journal
           </p>
         </div>
       </aside>

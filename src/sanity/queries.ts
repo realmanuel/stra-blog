@@ -1,10 +1,5 @@
 import { sanityFetch } from './sanity.client'
 import type { SanityPost, SanityPostStub, SanityCategory } from './types'
-
-// ─────────────────────────────────────────────
-// GROQ fragments — reused across queries
-// ─────────────────────────────────────────────
-
 // Safe category projection — if the referenced category doc is missing
 // or unpublished, the post is NOT dropped. It gets an Uncategorised fallback.
 const CATEGORY_FRAGMENT = /* groq */ `
@@ -33,7 +28,7 @@ const AUTHOR_FRAGMENT = /* groq */ `
     },
     {
       "_id": "unknown",
-      "name": "Stra Team",
+      "name": "Ark Team",
       "role": "Official"
     }
   )

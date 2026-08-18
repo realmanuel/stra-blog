@@ -19,7 +19,7 @@ export default function BlogFooter() {
           className="text-4xl md:text-5xl font-extrabold"
           style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.02em', color: '#F2F0EB' }}
         >
-          STR<span style={{ color: '#C8FF00' }}>A</span>
+          AR<span style={{ color: '#C8FF00' }}>K</span>
         </div>
 
         {/* Main Links */}
@@ -49,7 +49,7 @@ export default function BlogFooter() {
           className="text-[11px] tracking-[0.05em]"
           style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.25)' }}
         >
-          © {new Date().getFullYear()} Stra. All rights reserved.
+          © {new Date().getFullYear()} Ark. All rights reserved.
         </div>
 
         {/* Legal Links */}
