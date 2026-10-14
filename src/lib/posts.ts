@@ -1,9 +1,9 @@
 export type CategorySlug =
-  | 'update'
-  | 'spotlight'
-  | 'seller-story'
-  | 'tips'
-  | 'industry'
+  | 'general-tech-and-digital-innovation'
+  | 'modern-full-stack-development'
+  | 'data-analytics-and-engineering'
+  | 'tech-and-software-insights'
+  | 'rant'
   | 'uncategorised'
 
 export interface CategoryMeta {
@@ -14,32 +14,32 @@ export interface CategoryMeta {
 }
 
 export const CATEGORY_META: Record<CategorySlug, CategoryMeta> = {
-  update: {
-    label: 'Platform Update',
+  'general-tech-and-digital-innovation': {
+    label: 'General Tech and Digital Innovation',
     color: '#C8FF00',
     border: 'rgba(200,255,0,0.3)',
     bg: 'rgba(200,255,0,0.05)',
   },
-  spotlight: {
-    label: 'Product Spotlight',
+  'modern-full-stack-development': {
+    label: 'Modern Full-Stack Development',
     color: '#C8A0FF',
     border: 'rgba(200,160,255,0.3)',
     bg: 'rgba(200,160,255,0.05)',
   },
-  'seller-story': {
-    label: 'Seller Story',
+  'data-analytics-and-engineering': {
+    label: 'Data Analytics and Engineering',
     color: '#FF8C42',
     border: 'rgba(255,140,66,0.3)',
     bg: 'rgba(255,140,66,0.05)',
   },
-  tips: {
-    label: 'Platform Tips',
+  'tech-and-software-insights': {
+    label: 'Tech and Software Insights',
     color: '#42D4FF',
     border: 'rgba(66,212,255,0.3)',
     bg: 'rgba(66,212,255,0.05)',
   },
-  industry: {
-    label: 'Industry',
+  rant: {
+    label: 'Rant',
     color: 'rgba(242,240,235,0.5)',
     border: 'rgba(242,240,235,0.15)',
     bg: 'transparent',

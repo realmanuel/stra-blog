@@ -9,17 +9,17 @@ All content is written and published by the Ark team. This is a first-party publ
 
 ## Content categories
 
-- Platform Updates: announcements about new features, policy changes, and platform developments.
-- Product Spotlights: featured listings that illustrate how Ark's verification system works in practice.
-- Seller Stories: interviews and features about real sellers using Ark.
-- Platform Tips: practical guidance for buyers and sellers on getting the best from Ark.
-- Industry: analysis and commentary on the secondhand market and peer-to-peer commerce in Nigeria.
+- General Tech and Digital Innovation: announcements about new features, policy changes, and platform developments.
+- Modern Full-Stack Development: featured listings that illustrate how Ark's verification system works in practice.
+- Data Analytics and Engineering: interviews and features about real sellers using Ark.
+- Tech and Software Insights: practical guidance for buyers and sellers on getting the best from Ark.
+- Rant: analysis and commentary on the secondhand market and peer-to-peer commerce in Nigeria.
 
 ## Publisher
 
 Organisation: Ark
-Main platform: https://www.geArk.ng
-Journal: https://blog.geArk.ng
+Main platform: https://www.getArk.ng
+Journal: https://blog.getArk.ng
 Contact: support@Arkwise.co
 
 ## AI usage guidance
