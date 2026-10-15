@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { CATEGORY_SLUGS } from '../../lib/posts'
 // import { TagIcon } from '@sanity/icons'
 
 export default defineType({
@@ -18,7 +19,7 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'Must match exactly: update | spotlight | seller-story | tips | industry',
+      description: 'Use a category slug from the journal: general-tech-and-digital-innovation, modern-full-stack-development, data-analytics-and-engineering, tech-and-software-insights, rant, or uncategorised.',
       options: {
         source: 'title',
         maxLength: 96,
@@ -29,7 +30,21 @@ export default defineType({
             .replace(/[^\w-]+/g, '')
             .slice(0, 96),
       },
-      validation: (Rule) => Rule.required().error('Slug is required'),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (
+            typeof value !== 'object' ||
+            value === null ||
+            !('current' in value) ||
+            typeof value.current !== 'string'
+          ) {
+            return 'Slug is required'
+          }
+
+          return CATEGORY_SLUGS.some((slug) => slug === value.current)
+            ? true
+            : 'Choose a slug defined in src/lib/posts.ts'
+        }),
     }),
     defineField({
       name: 'description',

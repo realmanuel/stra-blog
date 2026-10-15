@@ -7,7 +7,7 @@
     const slugs = await getAllPostSlugs()
 
     const postRoutes = slugs.map(({ slug }) => ({
-        url: `${BASE_URL}/blog/${slug}`,
+        url: `${BASE_URL}/${slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.8,

@@ -6,7 +6,6 @@ import BlogHero from '@/components/blog/BlogHero'
 import PostCard from '@/components/blog/PostCard'
 import PostGrid from '@/components/blog/PostGrid'
 import CategoryBar from '@/components/blog/CategoryBar'
-import SpotlightStrip from '@/components/blog/SpotlightStrip'
 import {
   getAllPosts,
   getFeaturedPost,
@@ -24,7 +23,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const { category } = await searchParams
   if (!category || category === 'all') return {}
   const label = category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')
-  return { title: `${label} | Ark Journal` }
+  return { title: `${label} | Tech Notes` }
 }
 
 export default async function BlogIndexPage({ searchParams }: PageProps) {
@@ -39,10 +38,6 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
 
   const hero = activeCategory ? null : (featuredPost ?? postsResult[0] ?? null)
   const rest = hero ? postsResult.filter((p) => p.slug !== hero.slug) : postsResult
-
-  const sellerSpotlight = !activeCategory
-    ? (rest.find((p) => p.category.slug === 'seller-story') ?? null)
-    : null
 
   const gridRow1       = rest.slice(0, 3)
   const widePost       = !activeCategory ? (rest[3] ?? null) : null
@@ -74,7 +69,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 style={{ width: '28px', height: '1px', background: '#C8FF00', display: 'block', flexShrink: 0 }}
                 aria-hidden="true"
               />
-              Ark Journal
+              Tech Notes
             </div>
             <h1
               className="animate-fadeUp-2 font-extrabold"
@@ -85,7 +80,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 lineHeight: '0.94',
               }}
             >
-              Stories, Updates
+              Ideas, Code
               <br />
               &{' '}
               <em
@@ -96,7 +91,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                   color: 'rgba(242,240,235,0.3)',
                 }}
               >
-                Spotlights
+                & Insights
               </em>
             </h1>
           </div>
@@ -106,9 +101,8 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
               className="text-[12px] leading-[1.95] mb-6"
               style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.45)' }}
             >
-              The official Ark publication. Platform updates, product spotlights,
-              seller features, marketplace insights, and everything happening inside
-              Nigeria&apos;s smartest secondhand market.
+              A personal notebook on technology, full-stack development, data
+              engineering, software ideas, and the occasional rant.
             </p>
             <span
               className="text-[10px] uppercase tracking-[0.14em] px-4 py-[10px] inline-block"
@@ -119,7 +113,7 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 letterSpacing: '0.14em',
               }}
             >
-              Vol. 01 — 2026
+              Notes for curious builders
             </span>
           </div>
         </header>
@@ -163,8 +157,6 @@ export default async function BlogIndexPage({ searchParams }: PageProps) {
                 ))}
               </div>
             )}
-
-            {sellerSpotlight && <SpotlightStrip post={sellerSpotlight} />}
 
             {(widePost || tallPost) && (
               <div
@@ -241,4 +233,3 @@ function EmptyState() {
     </div>
   )
 }
-

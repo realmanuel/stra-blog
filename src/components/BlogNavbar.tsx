@@ -2,14 +2,22 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { CATEGORY_SLUGS } from '@/lib/posts'
 
-const NAV_LINKS = [
-  { label: 'Updates', href: '/?category=updates' },
-  { label: 'Spotlights', href: '/?category=spotlights' },
-  { label: 'Seller Stories', href: '/?category=seller-stories' },
-  { label: 'Platform Tips', href: '/?category=platform-tips' },
-  { label: 'Industry', href: '/?category=industry' },
-]
+const NAV_LABELS = {
+  'general-tech-and-digital-innovation': 'General Tech',
+  'modern-full-stack-development': 'Full-Stack',
+  'data-analytics-and-engineering': 'Data & Analytics',
+  'tech-and-software-insights': 'Software Insights',
+  rant: 'Rant',
+} as const
+
+const NAV_LINKS = CATEGORY_SLUGS
+  .filter((slug): slug is keyof typeof NAV_LABELS => slug in NAV_LABELS)
+  .map((slug) => ({
+    label: NAV_LABELS[slug],
+    href: `/?category=${slug}`,
+  }))
 
 export default function BlogNavbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -54,13 +62,13 @@ export default function BlogNavbar() {
         <Link
           href="/"
           className="flex items-center gap-3 no-underline flex-shrink-0"
-          aria-label="Ark Journal home"
+          aria-label="Tech Notes home"
         >
             <span
             className="text-[22px] font-extrabold tracking-tight"
             style={{ fontFamily: 'var(--font-syne)', color: '#F2F0EB', letterSpacing: '-0.02em' }}
           >
-            AR<span style={{ color: '#C8FF00' }}>K</span>
+            TECH
           </span>
           <span
             style={{ width: '1px', height: '16px', background: 'rgba(242,240,235,0.2)', display: 'block', flexShrink: 0 }}
@@ -70,7 +78,7 @@ export default function BlogNavbar() {
             className="text-[11px] uppercase tracking-[0.18em]"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.5)' }}
           >
-            Journal
+            Notes
           </span>
         </Link>
 
@@ -96,20 +104,13 @@ export default function BlogNavbar() {
 
         {/* Desktop right */}
         <div className="hidden md:flex items-center gap-5 flex-shrink-0">
-          <a
-            href="https://www.geArk.ng"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] no-underline transition-colors duration-200"
+          <Link
+            href="/"
+            className="text-[11px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 hover:text-[#C8FF00]"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.5)' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#C8FF00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(242,240,235,0.5)')}
           >
-            geArk.ng
-            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+            All posts
+          </Link>
         </div>
 
         {/* Mobile hamburger - Left exactly as in A */}
@@ -251,10 +252,8 @@ export default function BlogNavbar() {
             transform: menuOpen ? 'translateY(0)' : 'translateY(12px)',
           }}
         >
-          <a
-            href="https://www.geArk.ng"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/"
             onClick={close}
             className="flex items-center justify-center gap-2 w-full text-[12px] uppercase tracking-[0.12em] font-medium no-underline transition-all duration-200"
             style={{ fontFamily: 'var(--font-mono)', color: '#030305', background: '#C8FF00', padding: '16px 20px' }}
@@ -267,16 +266,16 @@ export default function BlogNavbar() {
               e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
-            Visit geArk.ng
+            Browse all posts
             <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-              <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2 5H8M8 5L5 2M8 5L5 8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
+          </Link>
           <p
             className="text-center text-[10px] uppercase tracking-[0.1em] mt-1"
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.2)' }}
           >
-            © {new Date().getFullYear()} Ark Journal
+            © {new Date().getFullYear()} Tech Notes
           </p>
         </div>
       </aside>

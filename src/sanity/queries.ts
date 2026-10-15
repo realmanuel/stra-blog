@@ -28,8 +28,8 @@ const AUTHOR_FRAGMENT = /* groq */ `
     },
     {
       "_id": "unknown",
-      "name": "Ark Team",
-      "role": "Official"
+      "name": "Unknown Author",
+      "role": ""
     }
   )
 `

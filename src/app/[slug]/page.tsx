@@ -23,12 +23,10 @@ export const dynamicParams = true
 const BASE_URL = 'https://blog.geArk.ng'
 
 export async function generateStaticParams() {
-  try {
-    const slugs = await getAllPostSlugs()
-    return slugs.filter((s) => Boolean(s?.slug)).map((s) => ({ slug: s.slug }))
-  } catch {
-    return []
-  }
+  const slugs = await getAllPostSlugs()
+  return slugs
+    .filter((post) => typeof post?.slug === 'string' && post.slug.length > 0)
+    .map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -119,7 +117,7 @@ export default async function PostPage({
             style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.35)' }}
 
           >
-            ← Ark Journal
+            ← Tech Notes
           </Link>
           <span
             style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(242,240,235,0.2)' }}
@@ -382,21 +380,9 @@ export default async function PostPage({
                   className="text-[11px] leading-[1.85] mb-5"
                   style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.38)' }}
                 >
-                  The official Ark publication — platform updates, seller stories,
-                  product spotlights, and marketplace insights.
+                  A personal technology journal exploring the ideas behind software,
+                  data, digital innovation, and the lessons learned while building.
                 </p>
-                <a
-                  href="https://www.geArk.ng"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] no-underline transition-colors duration-200 hover:tracking-[0.18em] hover:text-[#d4ff1a]"
-                  style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.32)' }}
-                >
-                  geArk.ng
-                  <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
               </div>
 
             </div>
@@ -405,7 +391,7 @@ export default async function PostPage({
 
         {/* ── More from Journal ── */}
         {sidebarPosts.length > 0 && (
-          <section aria-label="More from Ark Journal">
+          <section aria-label="More from Tech Notes">
             <div
               className="px-6 md:px-16 py-[18px] flex items-center gap-5"
               style={{ borderBottom: '1px solid rgba(242,240,235,0.08)' }}
@@ -414,7 +400,7 @@ export default async function PostPage({
                 className="text-[10px] uppercase tracking-[0.22em] flex-shrink-0"
                 style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.28)' }}
               >
-                More from Ark Journal
+                More from Tech Notes
               </span>
               <div style={{ flex: 1, height: '1px', background: 'rgba(242,240,235,0.06)' }} />
             </div>
@@ -434,4 +420,3 @@ export default async function PostPage({
     </>
   )
 }
-

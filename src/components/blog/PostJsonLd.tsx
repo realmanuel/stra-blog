@@ -7,15 +7,15 @@
 
     export default function PostJsonLd({ post }: PostJsonLdProps) {
     const BASE_URL = 'https://blog.geArk.ng'
-    const MAIN_URL = 'https://www.geArk.ng'
+    const postUrl = `${BASE_URL}/${post.slug}`
 
     const formattedDate = new Date(post.publishedAt).toISOString()
 
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
-        '@id': `${BASE_URL}/blog/${post.slug}`,
-        url: `${BASE_URL}/blog/${post.slug}`,
+        '@id': postUrl,
+        url: postUrl,
         headline: post.title,
         description: post.excerpt,
         datePublished: formattedDate,
@@ -24,29 +24,23 @@
         author: {
         '@type': 'Organization',
         name: post.author.name,
-        url: MAIN_URL,
+        url: BASE_URL,
         },
         publisher: {
         '@type': 'Organization',
-        '@id': `${MAIN_URL}/#organization`,
-        name: 'Ark',
-        url: MAIN_URL,
-        logo: {
-            '@type': 'ImageObject',
-            url: `${MAIN_URL}/og-image.png`,
-            width: 1200,
-            height: 630,
-        },
+        '@id': `${BASE_URL}/#publisher`,
+        name: 'Tech Notes',
+        url: BASE_URL,
         },
         isPartOf: {
         '@type': 'Blog',
         '@id': `${BASE_URL}/#blog`,
-        name: 'Ark Journal',
+        name: 'Tech Notes',
         url: BASE_URL,
         },
         mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `${BASE_URL}/blog/${post.slug}`,
+        '@id': postUrl,
         },
         ...(post.coverImage && {
         image: {
@@ -62,9 +56,9 @@
         articleSection: post.category.title,
         keywords: [
         post.category.title,
-        'Ark',
-        'Nigeria marketplace',
-        'secondhand Nigeria',
+        'Technology',
+        'Software development',
+        'Data engineering',
         ].join(', '),
         about: {
         '@type': 'Thing',

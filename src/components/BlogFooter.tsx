@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import { CATEGORY_META, CATEGORY_SLUGS } from '@/lib/posts'
 
-const links = [
-  { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Trust & Safety', href: '/trust' },
-  { label: 'TERMS', href: '/terms' },
-]
+const links = CATEGORY_SLUGS
+  .filter((slug) => slug !== 'uncategorised')
+  .map((slug) => ({
+    label: CATEGORY_META[slug].label,
+    href: `/?category=${slug}`,
+  }))
 
 export default function BlogFooter() {
   return (
@@ -19,7 +21,7 @@ export default function BlogFooter() {
           className="text-4xl md:text-5xl font-extrabold"
           style={{ fontFamily: 'var(--font-syne)', letterSpacing: '-0.02em', color: '#F2F0EB' }}
         >
-          AR<span style={{ color: '#C8FF00' }}>K</span>
+          TECH NOTES
         </div>
 
         {/* Main Links */}
@@ -49,7 +51,7 @@ export default function BlogFooter() {
           className="text-[11px] tracking-[0.05em]"
           style={{ fontFamily: 'var(--font-mono)', color: 'rgba(242,240,235,0.25)' }}
         >
-          © {new Date().getFullYear()} Ark. All rights reserved.
+          © {new Date().getFullYear()} Tech Notes.
         </div>
 
         {/* Legal Links */}

@@ -6,6 +6,15 @@ export type CategorySlug =
   | 'rant'
   | 'uncategorised'
 
+export const CATEGORY_SLUGS: CategorySlug[] = [
+  'general-tech-and-digital-innovation',
+  'modern-full-stack-development',
+  'data-analytics-and-engineering',
+  'tech-and-software-insights',
+  'rant',
+  'uncategorised',
+]
+
 export interface CategoryMeta {
   label: string
   color: string

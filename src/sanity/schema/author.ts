@@ -17,7 +17,7 @@ export default defineType({
       name: 'role',
       title: 'Role',
       type: 'string',
-      placeholder: 'e.g. Ark Team, Editorial, Official',
+      placeholder: 'e.g. your name or pen name',
       validation: (Rule) => Rule.max(60),
     }),
     defineField({

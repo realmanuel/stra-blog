@@ -31,26 +31,25 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
     title: {
-    default: 'Ark Blog | Stories, Updates & Spotlights',
-    template: '%s | Ark Blog',
-  },
+      default: 'Tech Notes | Software, Data & Digital Innovation',
+      template: '%s | Tech Notes',
+    },
 
-  description:
-    'The official Ark publication. Platform updates, product spotlights, seller stories, marketplace insights, and everything happening inside Nigeria\'s smartest secondhand market.',
+    description:
+      'A personal technology journal covering digital innovation, full-stack development, data engineering, software insights, and honest opinions.',
 
-  keywords: [
-    'Ark blog',
-    'Ark Journal',
-    'Nigeria marketplace news',
-    'secondhand market Nigeria',
-    'seller stories Nigeria',
-    'Ark updates',
-    'buy sell Nigeria tips',
-  ],
+    keywords: [
+      'technology',
+      'digital innovation',
+      'full-stack development',
+      'data analytics',
+      'data engineering',
+      'software insights',
+    ],
 
-  authors: [{ name: 'Ark Blog', url: BASE_URL }],
-  creator: 'Ark',
-  publisher: 'Ark',
+    authors: [{ name: 'Tech Notes', url: BASE_URL }],
+    creator: 'Tech Notes',
+    publisher: 'Tech Notes',
 
   robots: {
     index: true,
@@ -72,16 +71,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_NG',
     url: BASE_URL,
-    siteName: 'Ark Blog',
-    title: 'Ark Blog | Stories, Updates & Spotlights',
+    siteName: 'Tech Notes',
+    title: 'Tech Notes | Software, Data & Digital Innovation',
     description:
-      'The official Ark publication. Platform updates, product spotlights, seller stories and marketplace insights.',
+      'A personal technology journal covering software, data, digital innovation, and lessons from building.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Ark Blog',
+        alt: 'Tech Notes',
         type: 'image/png',
       },
     ],
@@ -89,11 +88,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    site: '@Arkmarketng',
-    creator: '@Arkmarketng',
-    title: 'Ark Blog | Stories, Updates & Spotlights',
+    title: 'Tech Notes | Software, Data & Digital Innovation',
     description:
-      'The official Ark publication. Platform updates, product spotlights, seller stories and marketplace insights.',
+      'A personal technology journal covering software, data, digital innovation, and lessons from building.',
     images: ['/og-image.png'],
   },
 }

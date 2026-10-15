@@ -8,8 +8,8 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
 
 export default defineConfig({
-  name: 'Ark-blog',
-  title: 'Ark Blog',
+  name: 'tech-notes',
+  title: 'Tech Notes',
   projectId,
   dataset,
 
@@ -17,7 +17,7 @@ export default defineConfig({
     structureTool({
       structure: (S) =>
         S.list()
-          .title('Ark Journal')
+          .title('Tech Notes')
           .items([
             S.listItem()
               .title('📝 Posts')
